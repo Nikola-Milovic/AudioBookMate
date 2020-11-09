@@ -1,7 +1,9 @@
+include(":feature_player")
 rootProject.buildFileName = "build.gradle.kts"
 
 rootProject.name = ("audiobookmate")
 
 include(
-    ":app"
+    ":app",
+    ":feature_player"
 )
