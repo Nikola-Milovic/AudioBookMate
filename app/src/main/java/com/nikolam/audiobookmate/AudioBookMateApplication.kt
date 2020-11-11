@@ -22,11 +22,5 @@ class AudioBookMateApplication : Application() {
             Timber.plant(Timber.DebugTree())
         }
 
-        // start Koin!
-        startKoin {
-            // declare used Android context
-            androidContext(this@AudioBookMateApplication)
-        }
-
     }
 }
