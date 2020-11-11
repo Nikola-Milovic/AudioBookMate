@@ -21,7 +21,7 @@ private object LibraryVersion {
     const val GLIDE = "4.11.0"
 
     //Koin
-    const val KOIN = "2.1.6"
+    const val KOIN = "2.2.0"
 }
 
 object LibraryDependency {

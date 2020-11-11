@@ -45,9 +45,6 @@ android {
 }
 
 dependencies {
-    implementation(LibraryDependency.ANDROID_LEGACY_SUPPORT)
-    implementation(LibraryDependency.LIFECYCLE_EXTENSIONS)
-    implementation(LibraryDependency.LIFECYCLE_VIEW_MODEL_KTX)
 
     api(LibraryDependency.NAVIGATION_FRAGMENT_KTX)
     api(LibraryDependency.NAVIGATION_UI_KTX)
@@ -64,6 +61,10 @@ dependencies {
     api(LibraryDependency.KOIN_ANDROID_EXTENSION)
     api(LibraryDependency.KOIN_ANDROID_SCOPE)
     api(LibraryDependency.KOIN_ANDROID_VIEWMODEL)
+    implementation(LibraryDependency.ANDROID_LEGACY_SUPPORT)
+    implementation(LibraryDependency.LIFECYCLE_EXTENSIONS)
+    implementation(LibraryDependency.LIFECYCLE_VIEW_MODEL_KTX)
+
 
     addTestDependencies()
 }
