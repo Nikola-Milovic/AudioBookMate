@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikolam.feature_player.R
+import com.nikolam.feature_player.databinding.PlayerFragmentBinding
 import com.nikolam.feature_player.di.viewmodelModule
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
@@ -26,15 +29,22 @@ class PlayerFragment : Fragment() {
 
     private val viewModel: PlayerViewModel by inject()
 
+    lateinit var binding : PlayerFragmentBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.player_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.player_fragment, container, false)
+        binding.apply {
+
+            val layoutMana =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+            lifecycleOwner = this@PlayerFragment
+        }
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-     //   viewModel = ViewModelProvider(this).get(PlayerViewModel::class.java)
-    }
 
     // Loading unloading modules
     override fun onAttach(context: Context) {
