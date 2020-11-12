@@ -9,7 +9,7 @@ object GradlePluginVersion {
 
 object GradlePluginId {
     const val DETEKT = "io.gitlab.arturbosch.detekt"
-    const val KTLINT = "plugins.ktlint"
+    const val KTLINT = "org.jlleitschuh.gradle.ktlint"
     const val SPOTLESS = "plugins.spotless"
 
     const val ANDROID_APPLICATION = "com.android.application"

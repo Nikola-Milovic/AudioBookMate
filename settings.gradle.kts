@@ -1,4 +1,3 @@
-include(":feature_player")
 rootProject.buildFileName = "build.gradle.kts"
 
 rootProject.name = ("audiobookmate")
