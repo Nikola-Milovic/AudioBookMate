@@ -26,12 +26,10 @@ object PluginsVersions {
     const val JACOCO = "0.16.0"
     const val FABRIC = "1.31.2"
     const val DOKKA = "0.10.0"
-    const val KTLINT = "0.36.0"
+    const val KTLINT = "9.2.1"
     const val SPOTLESS = "3.26.1"
-    const val DETEKT = "1.2.2"
+    const val DETEKT = "1.9.1"
     const val GRAPH_GENERATOR = "0.6.0-SNAPSHOT"
-
-    const val GOOGLE_SERVICES = "4.3.3"
 }
 
 dependencies {
@@ -45,7 +43,9 @@ dependencies {
     implementation("com.vanniktech:gradle-dependency-graph-generator-plugin:${PluginsVersions.GRAPH_GENERATOR}")
     implementation("io.fabric.tools:gradle:${PluginsVersions.FABRIC}")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginsVersions.DOKKA}")
-    implementation("com.pinterest:ktlint:${PluginsVersions.KTLINT}")
+
+    implementation("org.jlleitschuh.gradle:ktlint-gradle:${PluginsVersions.KTLINT}")
+
     implementation("com.diffplug.spotless:spotless-plugin-gradle:${PluginsVersions.SPOTLESS}")
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginsVersions.DETEKT}")
 }
