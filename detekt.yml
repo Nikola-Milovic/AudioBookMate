@@ -1,5 +1,5 @@
 build:
-  maxIssues: 0
+  maxIssues: 10
   weights:
   # complexity: 2
   # LongParameterList: 1
@@ -68,7 +68,8 @@ complexity:
     threshold: 60
   LongParameterList:
     active: true
-    threshold: 6
+    functionThreshold: 6
+    constructorThreshold: 3
     ignoreDefaultParameters: false
   MethodOverloading:
     active: true

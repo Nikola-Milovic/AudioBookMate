@@ -6,7 +6,6 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
-
 class AudioBookMateApplication : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -21,6 +20,5 @@ class AudioBookMateApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-
     }
 }

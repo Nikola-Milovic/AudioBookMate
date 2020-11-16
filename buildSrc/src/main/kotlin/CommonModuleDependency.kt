@@ -36,37 +36,37 @@ fun DependencyHandler.addTestDependencies() {
 // fix from https://github.com/igorwojda/android-showcase
 @Suppress("detekt.UnusedPrivateMember")
 private fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? =
-    add("implementation", dependencyNotation)
+        add("implementation", dependencyNotation)
 
 @Suppress("detekt.UnusedPrivateMember")
 private fun DependencyHandler.api(dependencyNotation: Any): Dependency? =
-    add("api", dependencyNotation)
+        add("api", dependencyNotation)
 
 @Suppress("detekt.UnusedPrivateMember")
 fun DependencyHandler.kapt(dependencyNotation: Any): Dependency? =
-    add("kapt", dependencyNotation)
+        add("kapt", dependencyNotation)
 
 @Suppress("detekt.UnusedPrivateMember")
 private fun DependencyHandler.kaptAndroidTest(dependencyNotation: Any): Dependency? =
-    add("kaptAndroidTest", dependencyNotation)
+        add("kaptAndroidTest", dependencyNotation)
 
 @Suppress("detekt.UnusedPrivateMember")
 private fun DependencyHandler.kaptTest(dependencyNotation: Any): Dependency? =
-    add("kaptTest", dependencyNotation)
+        add("kaptTest", dependencyNotation)
 
 private fun DependencyHandler.testImplementation(dependencyNotation: Any): Dependency? =
-    add("testImplementation", dependencyNotation)
+        add("testImplementation", dependencyNotation)
 
 private fun DependencyHandler.androidTestImplementation(dependencyNotation: Any): Dependency? =
-    add("androidTestImplementation", dependencyNotation)
+        add("androidTestImplementation", dependencyNotation)
 
 private fun DependencyHandler.debugImplementation(dependencyNotation: Any): Dependency? =
-    add("debugImplementation", dependencyNotation)
+        add("debugImplementation", dependencyNotation)
 
 
 private fun DependencyHandler.project(
-    path: String,
-    configuration: String? = null
+        path: String,
+        configuration: String? = null
 ): ProjectDependency {
     val notation = if (configuration != null) {
         mapOf("path" to path, "configuration" to configuration)

@@ -25,18 +25,18 @@ apply<SpotlessPlugin>()
 configure<SpotlessExtension> {
     format("misc") {
         target(
-            fileTree(
-                mapOf(
-                    "dir" to ".",
-                    "include" to listOf("**/*.md", "**/.gitignore", "**/*.yaml", "**/*.yml"),
-                    "exclude" to listOf(
-                        ".gradle/**",
-                        ".gradle-cache/**",
-                        "**/tools/**",
-                        "**/build/**"
-                    )
+                fileTree(
+                        mapOf(
+                                "dir" to ".",
+                                "include" to listOf("**/*.md", "**/.gitignore", "**/*.yaml", "**/*.yml"),
+                                "exclude" to listOf(
+                                        ".gradle/**",
+                                        ".gradle-cache/**",
+                                        "**/tools/**",
+                                        "**/build/**"
+                                )
+                        )
                 )
-            )
         )
         trimTrailingWhitespace()
         indentWithSpaces()
@@ -52,13 +52,13 @@ configure<SpotlessExtension> {
 
     kotlin {
         target(
-            fileTree(
-                mapOf(
-                    "dir" to ".",
-                    "include" to listOf("**/*.kt"),
-                    "exclude" to listOf("**/build/**", "**/buildSrc/**", "**/.*")
+                fileTree(
+                        mapOf(
+                                "dir" to ".",
+                                "include" to listOf("**/*.kt"),
+                                "exclude" to listOf("**/build/**", "**/buildSrc/**", "**/.*")
+                        )
                 )
-            )
         )
 //        licenseHeaderFile(
 //            rootProject.file(".spotless/copyright.kt"),
@@ -71,13 +71,13 @@ configure<SpotlessExtension> {
 
     kotlinGradle {
         target(
-            fileTree(
-                mapOf(
-                    "dir" to ".",
-                    "include" to listOf("**/*.gradle.kts", "*.gradle.kts"),
-                    "exclude" to listOf("**/build/**")
+                fileTree(
+                        mapOf(
+                                "dir" to ".",
+                                "include" to listOf("**/*.gradle.kts", "*.gradle.kts"),
+                                "exclude" to listOf("**/build/**")
+                        )
                 )
-            )
         )
 //        licenseHeaderFile(
 //            rootProject.file(".spotless/copyright.kt"),

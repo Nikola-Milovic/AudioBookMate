@@ -34,12 +34,12 @@ object LibraryDependency {
     const val PLAY_CORE = "com.google.android.play:core:${LibraryVersion.PLAY_CORE}"
 
     const val COROUTINES_ANDROID =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${CoreVersion.COROUTINES_ANDROID}"
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${CoreVersion.COROUTINES_ANDROID}"
     const val CORE_KTX = "androidx.core:core-ktx:${LibraryVersion.CORE_KTX}"
 
     //UI
     const val SUPPORT_CONSTRAINT_LAYOUT =
-        "androidx.constraintlayout:constraintlayout:${LibraryVersion.CONSTRAINT_LAYOUT}"
+            "androidx.constraintlayout:constraintlayout:${LibraryVersion.CONSTRAINT_LAYOUT}"
     const val APP_COMPACT = "androidx.appcompat:appcompat:${LibraryVersion.APP_COMPACT}"
     const val RECYCLER_VIEW = "androidx.recyclerview:recyclerview:${LibraryVersion.RECYCLER_VIEW}"
     const val MATERIAL = "com.google.android.material:material:${LibraryVersion.MATERIAL}"
@@ -51,18 +51,18 @@ object LibraryDependency {
 
     //LifeCycle
     const val LIFECYCLE_EXTENSIONS =
-        "androidx.lifecycle:lifecycle-extensions:${LibraryVersion.LIFECYCLE}"
+            "androidx.lifecycle:lifecycle-extensions:${LibraryVersion.LIFECYCLE}"
     const val LIFECYCLE_VIEW_MODEL_KTX =
-        "androidx.lifecycle:lifecycle-viewmodel-ktx:${LibraryVersion.LIFECYCLE_VIEW_MODEL_KTX}"
+            "androidx.lifecycle:lifecycle-viewmodel-ktx:${LibraryVersion.LIFECYCLE_VIEW_MODEL_KTX}"
     const val ANDROID_LEGACY_SUPPORT =
-        "androidx.legacy:legacy-support-v4:${LibraryVersion.ANDROID_LEGACY_SUPPORT}"
+            "androidx.legacy:legacy-support-v4:${LibraryVersion.ANDROID_LEGACY_SUPPORT}"
 
 
     const val NAVIGATION_FRAGMENT_KTX =
-        "androidx.navigation:navigation-fragment-ktx:${CoreVersion.NAVIGATION}"
+            "androidx.navigation:navigation-fragment-ktx:${CoreVersion.NAVIGATION}"
     const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${CoreVersion.NAVIGATION}"
     const val NAVIGATION_DYNAMIC_FEATURES =
-        "androidx.navigation:navigation-dynamic-features-fragment:${CoreVersion.NAVIGATION}"
+            "androidx.navigation:navigation-dynamic-features-fragment:${CoreVersion.NAVIGATION}"
 
     //Koin
     const val KOIN_ANDROID = "org.koin:koin-android:${LibraryVersion.KOIN}"

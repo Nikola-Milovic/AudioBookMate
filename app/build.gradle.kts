@@ -42,18 +42,13 @@ android {
     testOptions {
         animationsDisabled = true
     }
-
-
 }
-
 dependencies {
     api(LibraryDependency.ANDROID_LEGACY_SUPPORT)
     api(LibraryDependency.LIFECYCLE_EXTENSIONS)
     api(LibraryDependency.LIFECYCLE_VIEW_MODEL_KTX)
 
-
     api(LibraryDependency.TIMBER)
-
     api(LibraryDependency.NAVIGATION_FRAGMENT_KTX)
     api(LibraryDependency.NAVIGATION_UI_KTX)
     api(LibraryDependency.NAVIGATION_DYNAMIC_FEATURES)
@@ -64,7 +59,6 @@ dependencies {
 
     api(LibraryDependency.SUPPORT_CONSTRAINT_LAYOUT)
 
-
     api(LibraryDependency.KOIN_ANDROID)
     api(LibraryDependency.KOIN_ANDROID_EXTENSION)
     api(LibraryDependency.KOIN_ANDROID_SCOPE)
@@ -74,8 +68,3 @@ dependencies {
 
     addTestDependencies()
 }
-
-//sourceSets["main"].java {
-//    srcDirs("build/generated/source/navigation-args")
-//}
-//

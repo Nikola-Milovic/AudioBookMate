@@ -1,7 +1,6 @@
 import io.gitlab.arturbosch.detekt.detekt
 
-
-// all projects = root project + sub projects
+// all projects = root project + sub projects in li
 allprojects {
     repositories {
         google()

@@ -3,8 +3,6 @@ package com.nikolam.audiobookmate
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +22,4 @@ class MainActivity : AppCompatActivity() {
 
         Timber.v("onCreate ${javaClass.simpleName}")
     }
-
-
 }

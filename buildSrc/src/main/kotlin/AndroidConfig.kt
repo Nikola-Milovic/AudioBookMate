@@ -9,7 +9,7 @@ object AndroidConfig {
 
     const val ID = "com.nikolam.audiobookmate"
     const val TEST_INSTRUMENTATION_RUNNER =
-        "com.nikolam.menu.RestaurantOwnerTestRunner" //"android.support.test.runner.AndroidJUnitRunner"
+            "com.nikolam.menu.RestaurantOwnerTestRunner" //"android.support.test.runner.AndroidJUnitRunner"
 }
 
 interface BuildType {

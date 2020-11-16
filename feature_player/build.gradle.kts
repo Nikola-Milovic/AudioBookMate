@@ -34,7 +34,6 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-
     buildFeatures {
         dataBinding = true
     }
@@ -64,7 +63,6 @@ dependencies {
     implementation(LibraryDependency.ANDROID_LEGACY_SUPPORT)
     implementation(LibraryDependency.LIFECYCLE_EXTENSIONS)
     implementation(LibraryDependency.LIFECYCLE_VIEW_MODEL_KTX)
-
 
     addTestDependencies()
 }
