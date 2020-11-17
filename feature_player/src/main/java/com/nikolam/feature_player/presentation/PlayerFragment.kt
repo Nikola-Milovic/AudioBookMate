@@ -31,15 +31,15 @@ class PlayerFragment : Fragment() {
     lateinit var binding: PlayerFragmentBinding
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.player_fragment, container, false)
         binding.apply {
 
             val layoutMana =
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
             lifecycleOwner = this@PlayerFragment
         }

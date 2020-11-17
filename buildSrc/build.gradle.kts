@@ -27,7 +27,6 @@ object PluginsVersions {
     const val FABRIC = "1.31.2"
     const val DOKKA = "0.10.0"
     const val KTLINT = "9.2.1"
-    const val SPOTLESS = "3.26.1"
     const val DETEKT = "1.9.1"
     const val GRAPH_GENERATOR = "0.6.0-SNAPSHOT"
 }
@@ -46,6 +45,5 @@ dependencies {
 
     implementation("org.jlleitschuh.gradle:ktlint-gradle:${PluginsVersions.KTLINT}")
 
-    implementation("com.diffplug.spotless:spotless-plugin-gradle:${PluginsVersions.SPOTLESS}")
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginsVersions.DETEKT}")
 }
