@@ -1,4 +1,4 @@
-package com.nikolam.folder_chooser
+package com.nikolam.book_overview
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,4 +1,4 @@
-package com.nikolam.folder_chooser
+package com.nikolam.book_overview
 
 import org.junit.Test
 

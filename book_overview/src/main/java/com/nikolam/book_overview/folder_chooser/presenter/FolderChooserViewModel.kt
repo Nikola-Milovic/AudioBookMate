@@ -1,4 +1,4 @@
-package com.nikolam.folder_chooser.presenter
+package com.nikolam.book_overview.folder_chooser.presenter
 
 import androidx.lifecycle.ViewModel
 

@@ -65,7 +65,7 @@ dependencies {
     api(LibraryDependency.KOIN_ANDROID_VIEWMODEL)
 
     implementation(project(":feature_player"))
-   implementation(project(":folder_chooser"))
+    implementation(project(":book_overview"))
 
     addTestDependencies()
 }
