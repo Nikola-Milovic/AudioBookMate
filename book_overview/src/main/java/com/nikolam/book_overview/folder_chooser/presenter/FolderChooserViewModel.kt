@@ -2,7 +2,7 @@ package com.nikolam.book_overview.folder_chooser.presenter
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
-import com.nikolam.book_overview.folder_chooser.data.NaturalOrderComparator
+import com.nikolam.book_overview.misc.NaturalOrderComparator
 import com.nikolam.book_overview.folder_chooser.data.StorageDirFinder
 import com.nikolam.book_overview.misc.FileRecognition
 import java.io.File
@@ -38,14 +38,9 @@ class FolderChooserViewModel(private val storageDirFinder: StorageDirFinder) : V
 
     }
 
-    private fun showNewData(newData: List<File>) {
+    private fun showNewData(newData: List<File>){}
 
-    }
-
-    private fun setCurrentFolderText(newName: String) {
-
-    }
-
+    private fun setCurrentFolderText(newName: String){}
 
 }
 

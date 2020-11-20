@@ -1,5 +1,4 @@
-package com.nikolam.book_overview.folder_chooser.data
-
+package com.nikolam.book_overview.misc
 
 import java.util.Comparator
 
