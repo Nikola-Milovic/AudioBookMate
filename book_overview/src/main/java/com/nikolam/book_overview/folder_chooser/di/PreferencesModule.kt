@@ -7,11 +7,7 @@ import org.koin.dsl.module
 const val APPLICATION_ID = "com.nikolam.audiobookmate"
 
 val preferencesModule = module {
-
-
     single{provideSharedPreferences(get())}
-
-
 }
 
 fun provideSharedPreferences(context: Context): SharedPreferences {
