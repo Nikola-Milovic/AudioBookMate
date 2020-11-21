@@ -1,7 +1,6 @@
 package com.nikolam.book_overview.folder_chooser.presenter
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.ViewModel
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseAction
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseViewState
 import com.nikolam.book_overview.misc.NaturalOrderComparator
@@ -13,11 +12,15 @@ import com.nikolam.book_overview.misc.viewmodel.BaseViewModel
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
-import java.nio.file.Files
 import java.util.*
 import kotlin.math.min
 
-internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFinder, private val navManager: NavManager)
+enum class OperationMode {
+    COLLECTION_BOOK,
+    SINGLE_BOOK
+}
+
+internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFinder)
     : BaseViewModel<FolderChooserViewModel.ViewState, FolderChooserViewModel.Action>(ViewState()){
 
     private val rootDirs = ArrayList<File>()
@@ -27,21 +30,20 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
     lateinit var singleBookFolderPref: Pref<Set<String>>
     lateinit var collectionBookFolderPref: Pref<Set<String>>
 
-    enum class OperationMode {
-        COLLECTION_BOOK,
-        SINGLE_BOOK
-    }
-
     override fun onReduceState(viewAction: Action) = when(viewAction) {
         is Action.FilesLoadingSuccess -> state.copy(
             isLoading = false,
             isError  = false,
-            files = viewAction.files
+            files = viewAction.files,
+            currentFolderName = viewAction.name
         )
         is Action.FilesLoadingFailure -> state
     }
 
-
+    override fun onLoadData() {
+        super.onLoadData()
+        refreshRootDirs()
+    }
 
     @SuppressLint("MissingPermission")
     private fun refreshRootDirs() {
@@ -83,18 +85,14 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
     }
 
 
-    private fun fileSelected(selectedFile: File?) {
+    fun fileSelected(selectedFile: File?) {
         chosenFile = selectedFile
-
-        showNewData(selectedFile?.closestFolder()?.getContentsSorted() ?: emptyList())
-        setCurrentFolderText(selectedFile?.name ?: "")
-
+        showNewData(selectedFile?.closestFolder()?.getContentsSorted() ?: emptyList(), selectedFile?.name ?: "")
     }
 
-    private fun showNewData(newData: List<File>){}
-
-    private fun setCurrentFolderText(newName: String){}
-
+    private fun showNewData(newData: List<File>, name: String){
+        sendAction(Action.FilesLoadingSuccess( newData, name))
+    }
 
     private fun canAddNewFolder(newFile: String): Boolean {
         Timber.v("canAddNewFolder called with $newFile")
@@ -133,11 +131,12 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
     class ViewState(
         val isLoading: Boolean = true,
         val isError: Boolean = false,
-        val files : List<File> = listOf()
+        val files : List<File> = listOf(),
+        val currentFolderName : String = ""
     ) : BaseViewState
 
     internal sealed class Action : BaseAction {
-        class FilesLoadingSuccess(val files : List<File>) : Action()
+        class FilesLoadingSuccess(val files : List<File>, val name : String) : Action()
         object FilesLoadingFailure : Action()
     }
 }

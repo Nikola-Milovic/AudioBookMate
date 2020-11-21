@@ -22,6 +22,8 @@ private object LibraryVersion {
 
     //Koin
     const val KOIN = "2.2.0"
+
+    const val EASY_PERMISSION = "3.0.0"
 }
 
 object LibraryDependency {
@@ -69,4 +71,6 @@ object LibraryDependency {
     const val KOIN_ANDROID_SCOPE = "org.koin:koin-android-scope:${LibraryVersion.KOIN}"
     const val KOIN_ANDROID_VIEWMODEL = "org.koin:koin-android-viewmodel:${LibraryVersion.KOIN}"
     const val KOIN_ANDROID_EXTENSION = "org.koin:koin-android-ext:${LibraryVersion.KOIN}"
+
+    const val EASY_PERMISSION = "pub.devrel:easypermissions:${LibraryVersion.EASY_PERMISSION}"
 }

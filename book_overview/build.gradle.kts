@@ -64,5 +64,7 @@ dependencies {
     implementation(LibraryDependency.LIFECYCLE_EXTENSIONS)
     implementation(LibraryDependency.LIFECYCLE_VIEW_MODEL_KTX)
 
+    implementation(LibraryDependency.EASY_PERMISSION)
+
     addTestDependencies()
 }

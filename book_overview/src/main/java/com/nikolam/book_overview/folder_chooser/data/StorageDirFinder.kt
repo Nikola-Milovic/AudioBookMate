@@ -1,6 +1,7 @@
 package com.nikolam.book_overview.folder_chooser.data
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
@@ -8,19 +9,23 @@ import androidx.annotation.RequiresPermission
 import com.nikolam.book_overview.misc.NaturalOrderComparator
 import timber.log.Timber
 import java.io.File
+import java.util.*
 import java.util.regex.Pattern
 
 /**
  * Finder for external storages.
  */
 
+
 class StorageDirFinder (private val context: Context) {
 
+    val MARSHMALLOW_SD_FALLBACK = "/storage"
     /**
      * Collects the storage dirs of the device.
      *
      * @return the list of storages.
      */
+    @SuppressLint("MissingPermission")
     @RequiresPermission(value = Manifest.permission.READ_EXTERNAL_STORAGE)
     fun storageDirs(): List<File> {
         val dirSeparator = Pattern.compile("/")
@@ -82,7 +87,7 @@ class StorageDirFinder (private val context: Context) {
 
         // this is a workaround for marshmallow as we can't know the paths of the sd cards any more.
         // if one of the files in the fallback dir has contents we add it to the list.
-        // rv.add(FolderChooserPresenter.MARSHMALLOW_SD_FALLBACK)
+        rv.add(MARSHMALLOW_SD_FALLBACK)
         rv.addAll(storageDirs2())
 
         // get the non empty files
@@ -142,7 +147,7 @@ class StorageDirFinder (private val context: Context) {
         // Below few lines is to remove paths which may not be external memory card, like OTG (feel free to comment them out)
         var i = 0
         while (i < results.size) {
-            if (!results[i].toLowerCase().matches(".*[0-9a-f]{4}[-][0-9a-f]{4}".toRegex())) {
+            if (!results[i].toLowerCase(Locale.US).matches(".*[0-9a-f]{4}[-][0-9a-f]{4}".toRegex())) {
                 results.removeAt(i--)
             }
             i++
