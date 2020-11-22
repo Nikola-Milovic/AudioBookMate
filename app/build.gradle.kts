@@ -64,6 +64,8 @@ dependencies {
     api(LibraryDependency.KOIN_ANDROID_SCOPE)
     api(LibraryDependency.KOIN_ANDROID_VIEWMODEL)
 
+    implementation(LibraryDependency.EASY_PERMISSION)
+
     implementation(project(":feature_player"))
     implementation(project(":book_overview"))
 

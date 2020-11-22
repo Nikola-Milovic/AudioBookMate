@@ -86,6 +86,7 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
 
 
     fun fileSelected(selectedFile: File?) {
+        val bool = selectedFile?.canRead()
         chosenFile = selectedFile
         showNewData(selectedFile?.closestFolder()?.getContentsSorted() ?: emptyList(), selectedFile?.name ?: "")
     }

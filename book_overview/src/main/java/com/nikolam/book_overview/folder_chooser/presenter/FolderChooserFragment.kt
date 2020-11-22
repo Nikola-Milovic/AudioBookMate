@@ -1,7 +1,6 @@
 package com.nikolam.book_overview.folder_chooser.presenter
 
 
-import android.Manifest
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,11 +14,11 @@ import com.nikolam.book_overview.R
 import com.nikolam.book_overview.folder_chooser.di.storageModule
 import com.nikolam.book_overview.folder_chooser.di.viewModelModule
 import com.nikolam.book_overview.misc.observe
+import com.nikolam.book_overview.misc.PermissionHelper
+import com.nikolam.book_overview.misc.Permissions
 import kotlinx.android.synthetic.main.folder_chooser_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
-import pub.devrel.easypermissions.EasyPermissions
-import pub.devrel.easypermissions.PermissionRequest
 
 
 class FolderChooserFragment : Fragment() {
@@ -32,29 +31,6 @@ class FolderChooserFragment : Fragment() {
         adapter.newData(it.files)
     }
 
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        // Forward results to EasyPermissions
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (!EasyPermissions.hasPermissions(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-            // Do not have permissions, request them now
-            EasyPermissions.requestPermissions(this, "We need perms because this",
-                123, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

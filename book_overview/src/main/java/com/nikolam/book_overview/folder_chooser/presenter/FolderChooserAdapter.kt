@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nikolam.book_overview.R
 import com.nikolam.book_overview.databinding.FolderChooserFolderItemBinding
 import com.nikolam.book_overview.misc.bindings
+import timber.log.Timber
 import java.io.File
 
 class FolderChooserAdapter(
@@ -62,7 +63,9 @@ class FolderChooserAdapter(
             boundFile = selectedFile
             val isDirectory = selectedFile.isDirectory
 
-            binding.text.text = selectedFile.name
+            binding.folderName = selectedFile.name
+
+            Timber.d("name is %s", selectedFile.name)
 
             // if its not a collection its also fine to pick a file
             if (mode == OperationMode.COLLECTION_BOOK) {

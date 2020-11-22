@@ -98,7 +98,8 @@ class StorageDirFinder (private val context: Context) {
             map[it.canonicalPath] = it
         }
         // sort them
-        return map.values.sortedWith(NaturalOrderComparator.fileComparator)
+        val values = map.values.sortedWith(NaturalOrderComparator.fileComparator)
+        return values
     }
 
     // solution from http://stackoverflow.com/a/40205116
