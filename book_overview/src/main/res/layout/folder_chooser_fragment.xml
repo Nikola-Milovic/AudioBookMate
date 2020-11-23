@@ -107,14 +107,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/abort"
+            android:id="@+id/abort_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancel"/>
 
         <Button
-            android:id="@+id/choose"
+            android:id="@+id/choose_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

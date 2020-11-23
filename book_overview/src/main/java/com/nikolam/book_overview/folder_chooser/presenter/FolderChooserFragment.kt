@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikolam.book_overview.R
+import com.nikolam.book_overview.folder_chooser.di.prefsModule
 import com.nikolam.book_overview.folder_chooser.di.storageModule
 import com.nikolam.book_overview.folder_chooser.di.viewModelModule
 import com.nikolam.book_overview.misc.observe
@@ -27,10 +30,20 @@ class FolderChooserFragment : Fragment() {
 
     private lateinit var adapter: FolderChooserAdapter
 
+    lateinit var callback : OnBackPressedCallback
+
     private val stateObserver = Observer<FolderChooserViewModel.ViewState> {
         adapter.newData(it.files)
+        choose_button.isEnabled = !it.isError
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // This callback will only be called when MyFragment is at least Started.
+        callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+            onBackPressed()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +51,10 @@ class FolderChooserFragment : Fragment() {
     ): View? {
 
         return inflater.inflate(R.layout.folder_chooser_fragment, container, false)
+    }
+
+    fun onBackPressed() {
+        callback.isEnabled = viewModel.backConsumed()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,6 +72,14 @@ class FolderChooserFragment : Fragment() {
             )
         )
 
+        choose_button.setOnClickListener{
+            viewModel.fileChosen()
+        }
+
+        abort_button.setOnClickListener {
+
+        }
+
         folder_chooser_recyclerView.adapter = adapter
 
         observe(viewModel.stateLiveData, stateObserver)
@@ -63,8 +88,7 @@ class FolderChooserFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        loadKoinModules(listOf(viewModelModule, storageModule))
+        loadKoinModules(listOf(viewModelModule, storageModule, prefsModule))
     }
-
 
 }
