@@ -52,7 +52,7 @@ class FoldersOverviewAdapter(
         fun bind(fileDir: String) {
             binding.apply {
                 folderName = fileDir
-                Timber.d("FOlder name %s", fileDir)
+               // Timber.d("FOlder name %s", fileDir)
                 executePendingBindings()
             }
         }

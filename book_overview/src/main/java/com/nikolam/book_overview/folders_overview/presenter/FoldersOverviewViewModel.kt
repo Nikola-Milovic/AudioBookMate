@@ -13,8 +13,8 @@ import java.io.File
 internal class FoldersOverviewViewModel (private val bookManager: BookManager, private  val navManager: NavManager)
     : BaseViewModel<FoldersOverviewViewModel.ViewState, FoldersOverviewViewModel.Action>(ViewState()){
 
-    private var singleBookFolder: Set<String>
-    private var collectionBookFolder: Set<String>
+    private lateinit var singleBookFolder: Set<String>
+    private lateinit var collectionBookFolder: Set<String>
 
     override fun onReduceState(viewAction: Action) = when(viewAction) {
         is Action.FilesLoadingSuccess -> state.copy(
@@ -31,24 +31,26 @@ internal class FoldersOverviewViewModel (private val bookManager: BookManager, p
 
     override fun onLoadData() {
         super.onLoadData()
-    }
-
-    init {
         singleBookFolder = bookManager.provideBookSingleFolders()
         collectionBookFolder = bookManager.provideBookCollectionFolders()
 
         val combinedFolders = singleBookFolder.toMutableSet().plus(collectionBookFolder.toMutableSet())
 
-        Timber.d("SingleBooks %s", singleBookFolder.toString())
-        Timber.d("Collections %s", collectionBookFolder.toString())
+        Timber.d("SingleBooks overview %s", singleBookFolder.toString())
+        Timber.d("Collections overview %s", collectionBookFolder.toString())
         Timber.d("Combined %s", combinedFolders.toString())
 
         sendAction(Action.FilesLoadingSuccess( combinedFolders.toList()))
     }
 
+    init {
+        onLoadData()
+    }
+
 
     fun startFolderChooserWithOperationMode(operationMode: OperationMode){
-        navManager.navigate()
+        val navDirections = FoldersOverviewFragmentDirections.actionFoldersOverviewFragmentToFolderChooserFragment(operationMode.toString())
+        navManager.navigate(navDirections)
     }
 
 

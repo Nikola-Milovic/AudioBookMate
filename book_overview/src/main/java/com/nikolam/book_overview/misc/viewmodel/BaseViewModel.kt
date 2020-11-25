@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseAction
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseViewState
-import com.igorwojda.showcase.library.base.presentation.viewmodel.StateTimeTravelDebugger
 import com.nikolam.book_overview.BuildConfig
 import kotlin.properties.Delegates
 
@@ -22,7 +21,7 @@ abstract class BaseViewModel<ViewState : BaseViewState, ViewAction : BaseAction>
 
     init {
         if (BuildConfig.DEBUG) {
-            stateTimeTravelDebugger = StateTimeTravelDebugger(this::class.java.simpleName)
+            //stateTimeTravelDebugger = StateTimeTravelDebugger(this::class.java.simpleName)
         }
     }
 

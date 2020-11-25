@@ -28,10 +28,10 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
 
     private val rootDirs = ArrayList<File>()
     private var chosenFile: File? = null
-    private var operationMode : OperationMode
+    private lateinit var operationMode : OperationMode
 
-    private var singleBookFolder: Set<String>
-    private var collectionBookFolder: Set<String>
+    private lateinit var singleBookFolder: Set<String>
+    private lateinit var collectionBookFolder: Set<String>
 
     override fun onReduceState(viewAction: Action) = when(viewAction) {
         is Action.FilesLoadingSuccess -> state.copy(
@@ -48,18 +48,16 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
         )
     }
 
-    init {
-        singleBookFolder = bookManager.provideBookSingleFolders()
-        collectionBookFolder = bookManager.provideBookCollectionFolders()
-        operationMode = OperationMode.COLLECTION_BOOK
-
-        Timber.d("SingleBooks %s", singleBookFolder.toString())
-        Timber.d("Collections %s", collectionBookFolder.toString())
-    }
-
     override fun onLoadData() {
         super.onLoadData()
+        collectionBookFolder = bookManager.provideBookCollectionFolders()
+        singleBookFolder = bookManager.provideBookSingleFolders()
         refreshRootDirs()
+    }
+
+    fun setOperationMode(om: OperationMode){
+        operationMode = om
+        Timber.d("Operation mode is %s", operationMode.toString())
     }
 
     @SuppressLint("MissingPermission")
@@ -83,25 +81,15 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
         when (operationMode) {
             OperationMode.COLLECTION_BOOK -> {
                 if (canAddNewFolder(chosen.absolutePath)) {
-                    val collections = HashSet(collectionBookFolder)
-                    collections.add(chosen.absolutePath)
-                    collectionBookFolder = collections
+                    bookManager.saveSelectedFolder(chosen.absolutePath, operationMode)
                 }
-                //view.finish()
-                Timber.v("chosenCollection = $chosen")
             }
             OperationMode.SINGLE_BOOK -> {
                 if (canAddNewFolder(chosen.absolutePath)) {
-                    val singleBooks = HashSet(singleBookFolder)
-                    singleBooks.add(chosen.absolutePath)
-                    singleBookFolder = singleBooks
+                    bookManager.saveSelectedFolder(chosen.absolutePath, operationMode)
                 }
-                //view.finish()
-                Timber.v("chosenSingleBook = $chosen")
             }
         }
-
-        bookManager.saveSelectedBookFolders(collectionBookFolder, singleBookFolder)
     }
 
     private fun canGoBack(): Boolean {
@@ -114,7 +102,7 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
     }
 
     fun backConsumed(): Boolean {
-        Timber.d("up called. currentFolder=$chosenFile")
+       // Timber.d("up called. currentFolder=$chosenFile")
         return if (canGoBack()) {
             fileSelected(chosenFile!!.closestFolder().parentFile)
             true
@@ -124,7 +112,6 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
     }
 
     fun fileSelected(selectedFile: File?) {
-        val bool = selectedFile?.canRead()
         chosenFile = selectedFile
         showNewData(selectedFile?.closestFolder()?.getContentsSorted() ?: emptyList(), selectedFile?.name ?: "")
     }
@@ -134,7 +121,7 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
     }
 
     private fun canAddNewFolder(newFile: String): Boolean {
-        Timber.v("canAddNewFolder called with $newFile")
+        //Timber.v("canAddNewFolder called with $newFile")
         val folders = HashSet(collectionBookFolder)
         folders.addAll(singleBookFolder)
 

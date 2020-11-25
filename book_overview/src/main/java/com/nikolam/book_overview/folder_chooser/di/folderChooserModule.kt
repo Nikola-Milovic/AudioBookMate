@@ -8,6 +8,7 @@ import com.nikolam.book_overview.folder_chooser.presenter.FolderChooserViewModel
 import com.nikolam.book_overview.folders_overview.presenter.FoldersOverviewViewModel
 import com.nikolam.book_overview.misc.BOOK_COLLECTION
 import com.nikolam.book_overview.misc.BOOK_SINGLE
+import com.nikolam.book_overview.misc.NavManager
 import org.koin.android.experimental.dsl.viewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -17,9 +18,11 @@ import org.koin.dsl.module
 const val APPLICATION_ID = "com.nikolam.audiobookmate"
 
 val storageModule = module {
+
     single{provideSharedPreferences(get())}
     single{StorageDirFinder(get())}
     single{BookManager(get())}
+
 }
 
 fun provideSharedPreferences(context: Context): SharedPreferences {

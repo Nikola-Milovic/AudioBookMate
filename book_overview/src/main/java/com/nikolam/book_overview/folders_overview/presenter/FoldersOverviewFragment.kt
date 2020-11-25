@@ -42,6 +42,7 @@ class FoldersOverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.folders_overview_fragment, container, false)
     }
 
@@ -60,23 +61,24 @@ class FoldersOverviewFragment : Fragment() {
         folders_overview_recyclerView.adapter = adapter
 
         addAsSingle.setOnClickListener {
-
+            viewModel.startFolderChooserWithOperationMode(OperationMode.SINGLE_BOOK)
         }
         addAsLibrary.setOnClickListener {
-
+            viewModel.startFolderChooserWithOperationMode(OperationMode.COLLECTION_BOOK)
         }
 
         observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadData()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         loadKoinModules(listOf(viewModelModule, storageModule))
     }
 
-    override fun onDetach() {
-        super.onDetach()
+    override fun onDestroy() {
+        super.onDestroy()
         unloadKoinModules(listOf(viewModelModule, storageModule))
     }
 

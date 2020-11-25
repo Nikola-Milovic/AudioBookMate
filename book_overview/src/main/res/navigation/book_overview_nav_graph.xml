@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/folderChooserFragment"
         android:name="com.nikolam.book_overview.folder_chooser.presenter.FolderChooserFragment"
-        android:label="FolderChooserFragment" />
+        android:label="FolderChooserFragment" >
+        <argument
+            android:name="operationMode"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/foldersOverviewFragment"
         android:name="com.nikolam.book_overview.folders_overview.presenter.FoldersOverviewFragment"
