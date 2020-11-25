@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.nikolam.book_overview.BookManager
 import com.nikolam.book_overview.folder_chooser.data.StorageDirFinder
 import com.nikolam.book_overview.folder_chooser.presenter.FolderChooserViewModel
+import com.nikolam.book_overview.folders_overview.presenter.FoldersOverviewViewModel
 import com.nikolam.book_overview.misc.BOOK_COLLECTION
 import com.nikolam.book_overview.misc.BOOK_SINGLE
 import org.koin.android.experimental.dsl.viewModel
@@ -27,6 +28,7 @@ fun provideSharedPreferences(context: Context): SharedPreferences {
 
 val viewModelModule : Module = module {
     viewModel{FolderChooserViewModel(get(), get())}
+    viewModel{FoldersOverviewViewModel()}
 }
 
 
