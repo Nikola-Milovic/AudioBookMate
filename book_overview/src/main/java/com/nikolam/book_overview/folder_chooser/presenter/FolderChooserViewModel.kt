@@ -3,6 +3,7 @@ package com.nikolam.book_overview.folder_chooser.presenter
 import android.annotation.SuppressLint
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseAction
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseViewState
+import com.nikolam.book_overview.BookManager
 import com.nikolam.book_overview.misc.NaturalOrderComparator
 import com.nikolam.book_overview.folder_chooser.data.StorageDirFinder
 import com.nikolam.book_overview.misc.FileRecognition
@@ -22,15 +23,15 @@ enum class OperationMode {
     SINGLE_BOOK
 }
 
-internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFinder)
+internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFinder, private val bookManager: BookManager)
     : BaseViewModel<FolderChooserViewModel.ViewState, FolderChooserViewModel.Action>(ViewState()){
 
     private val rootDirs = ArrayList<File>()
     private var chosenFile: File? = null
-    private val operationMode : OperationMode? = null
+    private var operationMode : OperationMode
 
-    private lateinit var singleBookFolder: Set<String>
-    private lateinit var collectionBookFolder: Set<String>
+    private var singleBookFolder: Set<String>
+    private var collectionBookFolder: Set<String>
 
     override fun onReduceState(viewAction: Action) = when(viewAction) {
         is Action.FilesLoadingSuccess -> state.copy(
@@ -45,6 +46,15 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
             files = listOf(),
             currentFolderName = "Error"
         )
+    }
+
+    init {
+        singleBookFolder = bookManager.provideBookSingleFolders()
+        collectionBookFolder = bookManager.provideBookCollectionFolders()
+        operationMode = OperationMode.COLLECTION_BOOK
+
+        Timber.d("SingleBooks %s", singleBookFolder.toString())
+        Timber.d("Collections %s", collectionBookFolder.toString())
     }
 
     override fun onLoadData() {
@@ -64,7 +74,6 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
             else -> fileSelected(null)
         }
     }
-
 
     fun fileChosen(){
         addFileAndTerminate(chosenFile!!)
@@ -91,6 +100,8 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
                 Timber.v("chosenSingleBook = $chosen")
             }
         }
+
+        bookManager.saveSelectedBookFolders(collectionBookFolder, singleBookFolder)
     }
 
     private fun canGoBack(): Boolean {

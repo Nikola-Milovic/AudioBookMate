@@ -2,6 +2,7 @@ package com.nikolam.book_overview.folder_chooser.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.nikolam.book_overview.BookManager
 import com.nikolam.book_overview.folder_chooser.data.StorageDirFinder
 import com.nikolam.book_overview.folder_chooser.presenter.FolderChooserViewModel
 import com.nikolam.book_overview.misc.BOOK_COLLECTION
@@ -17,6 +18,7 @@ const val APPLICATION_ID = "com.nikolam.audiobookmate"
 val storageModule = module {
     single{provideSharedPreferences(get())}
     single{StorageDirFinder(get())}
+    single{BookManager(get())}
 }
 
 fun provideSharedPreferences(context: Context): SharedPreferences {
@@ -24,21 +26,7 @@ fun provideSharedPreferences(context: Context): SharedPreferences {
 }
 
 val viewModelModule : Module = module {
-    viewModel{FolderChooserViewModel(get())}
+    viewModel{FolderChooserViewModel(get(), get())}
 }
 
-val prefsModule = module {
-
-    single<Set<String>>(named(BOOK_COLLECTION)){ provideBookCollectionFolders(get())}
-    single<Set<String>>(named(BOOK_SINGLE)){ provideBookCollectionFolders(get())}
-
-}
-
-fun provideBookCollectionFolders(sharedPreferences: SharedPreferences) : Set<String>{
-    return sharedPreferences.getStringSet(BOOK_COLLECTION, emptySet()) ?: emptySet()
-}
-
-fun provideBookSingleFolders(sharedPreferences: SharedPreferences) : Set<String>{
-    return sharedPreferences.getStringSet(BOOK_SINGLE, emptySet()) ?: emptySet()
-}
 

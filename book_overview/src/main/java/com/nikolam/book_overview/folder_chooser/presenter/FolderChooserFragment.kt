@@ -1,6 +1,5 @@
 package com.nikolam.book_overview.folder_chooser.presenter
 
-
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,12 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikolam.book_overview.R
-import com.nikolam.book_overview.folder_chooser.di.prefsModule
 import com.nikolam.book_overview.folder_chooser.di.storageModule
 import com.nikolam.book_overview.folder_chooser.di.viewModelModule
 import com.nikolam.book_overview.misc.observe
-import com.nikolam.book_overview.misc.PermissionHelper
-import com.nikolam.book_overview.misc.Permissions
 import kotlinx.android.synthetic.main.folder_chooser_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
@@ -88,7 +84,7 @@ class FolderChooserFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        loadKoinModules(listOf(viewModelModule, storageModule, prefsModule))
+        loadKoinModules(listOf(viewModelModule, storageModule))
     }
 
 }

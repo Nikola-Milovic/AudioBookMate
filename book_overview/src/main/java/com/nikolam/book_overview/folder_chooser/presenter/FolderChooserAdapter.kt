@@ -65,8 +65,6 @@ class FolderChooserAdapter(
 
             binding.folderName = selectedFile.name
 
-            Timber.d("name is %s", selectedFile.name)
-
             // if its not a collection its also fine to pick a file
             if (mode == OperationMode.COLLECTION_BOOK) {
                 binding.text.isEnabled = isDirectory
