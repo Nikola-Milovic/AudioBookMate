@@ -24,6 +24,8 @@ private object LibraryVersion {
     const val KOIN = "2.2.0"
 
     const val EASY_PERMISSION = "3.0.0"
+
+    const val FLOATING_ACTION_BUTTON = "1.10.1"
 }
 
 object LibraryDependency {
@@ -73,4 +75,6 @@ object LibraryDependency {
     const val KOIN_ANDROID_EXTENSION = "org.koin:koin-android-ext:${LibraryVersion.KOIN}"
 
     const val EASY_PERMISSION = "pub.devrel:easypermissions:${LibraryVersion.EASY_PERMISSION}"
+
+    const val FLOATING_ACTION_BUTTON = "com.getbase:floatingactionbutton:${LibraryVersion.FLOATING_ACTION_BUTTON}"
 }

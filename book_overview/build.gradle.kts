@@ -66,5 +66,7 @@ dependencies {
 
     implementation(LibraryDependency.EASY_PERMISSION)
 
+    implementation(LibraryDependency.FLOATING_ACTION_BUTTON)
+
     addTestDependencies()
 }

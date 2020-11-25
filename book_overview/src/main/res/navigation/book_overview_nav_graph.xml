@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/app_navigation_graph"
+    app:startDestination="@id/foldersOverviewFragment">
+
+    <fragment
+        android:id="@+id/folderChooserFragment"
+        android:name="com.nikolam.book_overview.folder_chooser.presenter.FolderChooserFragment"
+        android:label="FolderChooserFragment" />
+    <fragment
+        android:id="@+id/foldersOverviewFragment"
+        android:name="com.nikolam.book_overview.folders_overview.presenter.FoldersOverviewFragment"
+        android:label="FoldersOverviewFragment" >
+        <action
+            android:id="@+id/action_foldersOverviewFragment_to_folderChooserFragment"
+            app:destination="@id/folderChooserFragment" />
+    </fragment>
+</navigation>

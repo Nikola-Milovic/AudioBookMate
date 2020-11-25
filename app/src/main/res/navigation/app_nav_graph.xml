@@ -2,14 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app_navigation_graph"
-    app:startDestination="@id/folderChooserFragment">
+    app:startDestination="@id/app_navigation_graph">
 
     <fragment
         android:id="@+id/playerFragment"
         android:name="com.nikolam.feature_player.presentation.PlayerFragment"
         android:label="PlayerFragment" />
-    <fragment
-        android:id="@+id/folderChooserFragment"
-        android:name="com.nikolam.book_overview.folder_chooser.presenter.FolderChooserFragment"
-        android:label="FolderChooserFragment" />
+    <include app:graph="@navigation/book_overview_nav_graph" />
 </navigation>

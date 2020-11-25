@@ -28,7 +28,7 @@ fun provideSharedPreferences(context: Context): SharedPreferences {
 
 val viewModelModule : Module = module {
     viewModel{FolderChooserViewModel(get(), get())}
-    viewModel{FoldersOverviewViewModel()}
+    viewModel{FoldersOverviewViewModel(get(), get())}
 }
 
 

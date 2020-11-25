@@ -20,6 +20,7 @@ import com.nikolam.book_overview.folder_chooser.presenter.FolderChooserViewModel
 import com.nikolam.book_overview.folder_chooser.presenter.OperationMode
 import com.nikolam.book_overview.misc.observe
 import kotlinx.android.synthetic.main.folder_chooser_fragment.*
+import kotlinx.android.synthetic.main.folders_overview_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -29,24 +30,41 @@ class FoldersOverviewFragment : Fragment() {
 
     private val viewModel: FoldersOverviewViewModel by viewModel()
 
-    private lateinit var adapter: FolderChooserAdapter
+    private lateinit var adapter: FoldersOverviewAdapter
 
     lateinit var callback : OnBackPressedCallback
 
     private val stateObserver = Observer<FoldersOverviewViewModel.ViewState> {
-
+        adapter.newData(it.files)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.folder_chooser_fragment, container, false)
+        return inflater.inflate(R.layout.folders_overview_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = FoldersOverviewAdapter(requireContext())
+
+        folders_overview_recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        folders_overview_recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
+        folders_overview_recyclerView.adapter = adapter
+
+        addAsSingle.setOnClickListener {
+
+        }
+        addAsLibrary.setOnClickListener {
+
+        }
 
         observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadData()
