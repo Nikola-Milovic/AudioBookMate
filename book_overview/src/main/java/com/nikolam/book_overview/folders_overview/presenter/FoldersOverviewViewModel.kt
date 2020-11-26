@@ -34,7 +34,7 @@ internal class FoldersOverviewViewModel (private val bookManager: BookManager, p
         singleBookFolder = bookManager.provideBookSingleFolders()
         collectionBookFolder = bookManager.provideBookCollectionFolders()
 
-        val combinedFolders = singleBookFolder.toMutableSet().plus(collectionBookFolder.toMutableSet())
+        val combinedFolders = singleBookFolder.plus(collectionBookFolder)
 
         Timber.d("SingleBooks overview %s", singleBookFolder.toString())
         Timber.d("Collections overview %s", collectionBookFolder.toString())
@@ -42,11 +42,6 @@ internal class FoldersOverviewViewModel (private val bookManager: BookManager, p
 
         sendAction(Action.FilesLoadingSuccess( combinedFolders.toList()))
     }
-
-    init {
-        onLoadData()
-    }
-
 
     fun startFolderChooserWithOperationMode(operationMode: OperationMode){
         val navDirections = FoldersOverviewFragmentDirections.actionFoldersOverviewFragmentToFolderChooserFragment(operationMode.toString())

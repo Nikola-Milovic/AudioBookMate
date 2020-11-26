@@ -38,7 +38,6 @@
                 android:id="@+id/addAsSingle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat = "@drawable/ic_folder"
                 app:fab_size="mini"
                 app:fab_title="Add single book"/>
 
@@ -46,7 +45,6 @@
                 android:id="@+id/addAsLibrary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat = "@drawable/ic_album"
                 app:fab_size="mini"
                 app:fab_title="Add collections book" />
 

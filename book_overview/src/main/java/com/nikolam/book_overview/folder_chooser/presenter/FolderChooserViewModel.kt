@@ -4,13 +4,10 @@ import android.annotation.SuppressLint
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseAction
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseViewState
 import com.nikolam.book_overview.BookManager
-import com.nikolam.book_overview.misc.NaturalOrderComparator
 import com.nikolam.book_overview.folder_chooser.data.StorageDirFinder
 import com.nikolam.book_overview.misc.FileRecognition
+import com.nikolam.book_overview.misc.NaturalOrderComparator
 import com.nikolam.book_overview.misc.viewmodel.BaseViewModel
-import org.koin.experimental.property.inject
-import org.koin.java.KoinJavaComponent.get
-import org.koin.java.KoinJavaComponent.inject
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
@@ -23,20 +20,22 @@ enum class OperationMode {
     SINGLE_BOOK
 }
 
-internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFinder, private val bookManager: BookManager)
-    : BaseViewModel<FolderChooserViewModel.ViewState, FolderChooserViewModel.Action>(ViewState()){
+internal class FolderChooserViewModel(
+    private val storageDirFinder: StorageDirFinder,
+    private val bookManager: BookManager
+) : BaseViewModel<FolderChooserViewModel.ViewState, FolderChooserViewModel.Action>(ViewState()) {
 
     private val rootDirs = ArrayList<File>()
     private var chosenFile: File? = null
-    private lateinit var operationMode : OperationMode
+    private lateinit var operationMode: OperationMode
 
     private lateinit var singleBookFolder: Set<String>
     private lateinit var collectionBookFolder: Set<String>
 
-    override fun onReduceState(viewAction: Action) = when(viewAction) {
+    override fun onReduceState(viewAction: Action) = when (viewAction) {
         is Action.FilesLoadingSuccess -> state.copy(
             isLoading = false,
-            isError  = false,
+            isError = false,
             files = viewAction.files,
             currentFolderName = viewAction.name
         )
@@ -55,7 +54,7 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
         refreshRootDirs()
     }
 
-    fun setOperationMode(om: OperationMode){
+    fun setOperationMode(om: OperationMode) {
         operationMode = om
         Timber.d("Operation mode is %s", operationMode.toString())
     }
@@ -73,22 +72,13 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
         }
     }
 
-    fun fileChosen(){
+    fun fileChosen() {
         addFileAndTerminate(chosenFile!!)
     }
 
     private fun addFileAndTerminate(chosen: File) {
-        when (operationMode) {
-            OperationMode.COLLECTION_BOOK -> {
-                if (canAddNewFolder(chosen.absolutePath)) {
-                    bookManager.saveSelectedFolder(chosen.absolutePath, operationMode)
-                }
-            }
-            OperationMode.SINGLE_BOOK -> {
-                if (canAddNewFolder(chosen.absolutePath)) {
-                    bookManager.saveSelectedFolder(chosen.absolutePath, operationMode)
-                }
-            }
+        if (canAddNewFolder(chosen.absolutePath)) {
+            bookManager.saveSelectedFolder(chosen.absolutePath, operationMode)
         }
     }
 
@@ -102,7 +92,7 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
     }
 
     fun backConsumed(): Boolean {
-       // Timber.d("up called. currentFolder=$chosenFile")
+        // Timber.d("up called. currentFolder=$chosenFile")
         return if (canGoBack()) {
             fileSelected(chosenFile!!.closestFolder().parentFile)
             true
@@ -113,11 +103,12 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
 
     fun fileSelected(selectedFile: File?) {
         chosenFile = selectedFile
-        showNewData(selectedFile?.closestFolder()?.getContentsSorted() ?: emptyList(), selectedFile?.name ?: "")
+        showNewData(selectedFile?.closestFolder()?.getContentsSorted() ?: emptyList(),
+            selectedFile?.name ?: "")
     }
 
-    private fun showNewData(newData: List<File>, name: String){
-        sendAction(Action.FilesLoadingSuccess( newData, name))
+    private fun showNewData(newData: List<File>, name: String) {
+        sendAction(Action.FilesLoadingSuccess(newData, name))
     }
 
     private fun canAddNewFolder(newFile: String): Boolean {
@@ -144,7 +135,7 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
             val filesAreSubsets = (0..max).none { oldParts[it] != newParts[it] }
             if (filesAreSubsets) {
                 Timber.i("the files are sub folders of each other.")
-              //  view.showSubFolderWarning(s, newFile)
+                //  view.showSubFolderWarning(s, newFile)
                 return false
             }
         }
@@ -156,12 +147,12 @@ internal class FolderChooserViewModel(private val storageDirFinder: StorageDirFi
     class ViewState(
         val isLoading: Boolean = true,
         val isError: Boolean = false,
-        val files : List<File> = listOf(),
-        val currentFolderName : String = ""
+        val files: List<File> = listOf(),
+        val currentFolderName: String = ""
     ) : BaseViewState
 
     internal sealed class Action : BaseAction {
-        class FilesLoadingSuccess(val files : List<File>, val name : String) : Action()
+        class FilesLoadingSuccess(val files: List<File>, val name: String) : Action()
         object FilesLoadingFailure : Action()
     }
 }

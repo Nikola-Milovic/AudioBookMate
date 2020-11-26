@@ -1,25 +1,22 @@
 package com.nikolam.book_overview.folders_overview.presenter
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProvider
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
+import androidx.annotation.ColorInt
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikolam.book_overview.R
 import com.nikolam.book_overview.folder_chooser.di.storageModule
 import com.nikolam.book_overview.folder_chooser.di.viewModelModule
-import com.nikolam.book_overview.folder_chooser.presenter.FolderChooserAdapter
-import com.nikolam.book_overview.folder_chooser.presenter.FolderChooserViewModel
 import com.nikolam.book_overview.folder_chooser.presenter.OperationMode
 import com.nikolam.book_overview.misc.observe
-import kotlinx.android.synthetic.main.folder_chooser_fragment.*
 import kotlinx.android.synthetic.main.folders_overview_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
@@ -32,7 +29,7 @@ class FoldersOverviewFragment : Fragment() {
 
     private lateinit var adapter: FoldersOverviewAdapter
 
-    lateinit var callback : OnBackPressedCallback
+    lateinit var callback: OnBackPressedCallback
 
     private val stateObserver = Observer<FoldersOverviewViewModel.ViewState> {
         adapter.newData(it.files)
@@ -67,10 +64,16 @@ class FoldersOverviewFragment : Fragment() {
             viewModel.startFolderChooserWithOperationMode(OperationMode.COLLECTION_BOOK)
         }
 
+        addAsSingle.setIconDrawable(requireContext().getDrawable(R.drawable.ic_folder)!!
+            .tinted(Color.WHITE))
+        addAsLibrary.setIconDrawable(requireContext().getDrawable(R.drawable.ic_album)!!
+            .tinted(Color.WHITE))
+        addAsSingle.title = "Single book e.g. Harry Potter 4"
+        addAsLibrary.title = "Folder with multiple books e.g. AudioBooks"
+
         observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadData()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,3 +86,6 @@ class FoldersOverviewFragment : Fragment() {
     }
 
 }
+
+
+private fun Drawable.tinted(@ColorInt color: Int): Drawable = mutate().apply { setTint(color) }
