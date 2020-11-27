@@ -6,5 +6,5 @@ rootProject.name = ("audiobookmate")
 include(
         ":app",
         ":feature_player",
-    ":book_overview"
+    ":feature_folders"
 )

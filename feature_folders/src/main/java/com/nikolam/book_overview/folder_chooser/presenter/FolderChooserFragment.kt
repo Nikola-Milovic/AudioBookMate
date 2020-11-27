@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -75,6 +76,8 @@ class FolderChooserFragment : Fragment() {
 
         choose_button.setOnClickListener{
             viewModel.fileChosen()
+//            val fm = requireActivity()
+//                .supportFragmentManager.popBackStackImmediate()
         }
 
         abort_button.setOnClickListener {

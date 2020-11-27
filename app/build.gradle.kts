@@ -67,7 +67,7 @@ dependencies {
     implementation(LibraryDependency.EASY_PERMISSION)
 
     implementation(project(":feature_player"))
-    implementation(project(":book_overview"))
+    implementation(project(":feature_folders"))
 
     addTestDependencies()
 }

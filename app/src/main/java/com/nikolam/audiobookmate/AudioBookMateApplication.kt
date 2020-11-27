@@ -1,6 +1,7 @@
 package com.nikolam.audiobookmate
 
 import android.app.Application
+import com.nikolam.audiobookmate.di.commonModule
 import com.nikolam.audiobookmate.di.navigationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,7 +18,7 @@ class AudioBookMateApplication : Application() {
             androidContext(this@AudioBookMateApplication)
         }
 
-        loadKoinModules(navigationModule)
+        loadKoinModules(listOf(navigationModule,commonModule))
         // This will initialise Timber
         // This will initialise Timber
         if (BuildConfig.DEBUG) {

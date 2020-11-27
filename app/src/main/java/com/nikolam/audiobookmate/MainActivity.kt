@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.nikolam.book_overview.BookManager
 import com.nikolam.book_overview.misc.NavManager
 import com.nikolam.book_overview.misc.PermissionHelper
 import com.nikolam.book_overview.misc.Permissions
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import pub.devrel.easypermissions.EasyPermissions
 import timber.log.Timber
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         initNavManager()
 
         setContentView(layoutResId)
+
+        val bookManager : BookManager = get()
 
         supportActionBar?.hide()
 

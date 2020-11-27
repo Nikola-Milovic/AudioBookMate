@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseAction
 import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseViewState
 import com.nikolam.book_overview.BookManager
+import com.nikolam.book_overview.R
 import com.nikolam.book_overview.folder_chooser.data.StorageDirFinder
+import com.nikolam.book_overview.folders_overview.presenter.FoldersOverviewFragmentDirections
 import com.nikolam.book_overview.misc.FileRecognition
 import com.nikolam.book_overview.misc.NaturalOrderComparator
+import com.nikolam.book_overview.misc.NavManager
 import com.nikolam.book_overview.misc.viewmodel.BaseViewModel
 import timber.log.Timber
 import java.io.File
@@ -22,7 +25,8 @@ enum class OperationMode {
 
 internal class FolderChooserViewModel(
     private val storageDirFinder: StorageDirFinder,
-    private val bookManager: BookManager
+    private val bookManager: BookManager,
+private val navManager: NavManager
 ) : BaseViewModel<FolderChooserViewModel.ViewState, FolderChooserViewModel.Action>(ViewState()) {
 
     private val rootDirs = ArrayList<File>()
@@ -51,6 +55,10 @@ internal class FolderChooserViewModel(
         super.onLoadData()
         collectionBookFolder = bookManager.provideBookCollectionFolders()
         singleBookFolder = bookManager.provideBookSingleFolders()
+
+        Timber.d("SingleBooks chooser %s", singleBookFolder.toString())
+        Timber.d("Collections chooser %s", collectionBookFolder.toString())
+
         refreshRootDirs()
     }
 
@@ -80,6 +88,7 @@ internal class FolderChooserViewModel(
         if (canAddNewFolder(chosen.absolutePath)) {
             bookManager.saveSelectedFolder(chosen.absolutePath, operationMode)
         }
+        navManager.navigate(FolderChooserFragmentDirections.actionFolderChooserFragmentToFoldersOverviewFragment())
     }
 
     private fun canGoBack(): Boolean {

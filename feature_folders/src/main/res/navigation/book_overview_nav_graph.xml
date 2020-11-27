@@ -11,6 +11,9 @@
         <argument
             android:name="operationMode"
             app:argType="string" />
+        <action
+            android:id="@+id/action_folderChooserFragment_to_foldersOverviewFragment"
+            app:destination="@id/foldersOverviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/foldersOverviewFragment"

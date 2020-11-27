@@ -18,11 +18,7 @@ import org.koin.dsl.module
 const val APPLICATION_ID = "com.nikolam.audiobookmate"
 
 val storageModule = module {
-
-    single{provideSharedPreferences(get())}
     single{StorageDirFinder(get())}
-    single{BookManager(get())}
-
 }
 
 fun provideSharedPreferences(context: Context): SharedPreferences {
@@ -30,7 +26,7 @@ fun provideSharedPreferences(context: Context): SharedPreferences {
 }
 
 val viewModelModule : Module = module {
-    viewModel{FolderChooserViewModel(get(), get())}
+    viewModel{FolderChooserViewModel(get(), get(), get())}
     viewModel{FoldersOverviewViewModel(get(), get())}
 }
 
