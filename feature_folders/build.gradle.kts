@@ -47,7 +47,6 @@ dependencies {
 
     api(LibraryDependency.NAVIGATION_FRAGMENT_KTX)
     api(LibraryDependency.NAVIGATION_UI_KTX)
-    api(LibraryDependency.NAVIGATION_DYNAMIC_FEATURES)
 
     api(LibraryDependency.RECYCLER_VIEW)
     api(LibraryDependency.MATERIAL)
@@ -64,9 +63,9 @@ dependencies {
     implementation(LibraryDependency.LIFECYCLE_EXTENSIONS)
     implementation(LibraryDependency.LIFECYCLE_VIEW_MODEL_KTX)
 
-    implementation(LibraryDependency.EASY_PERMISSION)
-
     implementation(LibraryDependency.FLOATING_ACTION_BUTTON)
+
+    implementation(project(":common"))
 
     addTestDependencies()
 }

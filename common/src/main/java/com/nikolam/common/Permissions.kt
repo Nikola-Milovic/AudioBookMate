@@ -1,4 +1,4 @@
-package com.nikolam.book_overview.misc
+package com.nikolam.common
 
 import android.app.Activity
 import android.content.Context
@@ -22,7 +22,7 @@ class Permissions(private val activity: Activity) {
 
   suspend fun request(permission: String): PermissionResult {
     return if (activity.hasPermission(permission)) {
-      PermissionResult.GRANTED
+        PermissionResult.GRANTED
     } else {
       permissionChannel.asFlow()
         .onStart {

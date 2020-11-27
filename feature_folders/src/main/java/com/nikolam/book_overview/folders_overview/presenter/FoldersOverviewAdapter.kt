@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nikolam.book_overview.R
-import com.nikolam.book_overview.databinding.FolderChooserFolderItemBinding
 import com.nikolam.book_overview.databinding.FolderOverviewFolderItemBinding
-import com.nikolam.book_overview.misc.bindings
-import timber.log.Timber
-import java.io.File
+import com.nikolam.common.bindings
 
 class FoldersOverviewAdapter(
     private val c: Context

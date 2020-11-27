@@ -1,4 +1,4 @@
-package com.nikolam.book_overview.misc
+package com.nikolam.common
 
 import java.io.FileFilter
 import java.util.Locale

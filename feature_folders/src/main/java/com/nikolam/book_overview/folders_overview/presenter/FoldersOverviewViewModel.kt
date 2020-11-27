@@ -1,17 +1,13 @@
 package com.nikolam.book_overview.folders_overview.presenter
 
-import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseAction
-import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseViewState
 import com.nikolam.book_overview.BookManager
-import com.nikolam.book_overview.folder_chooser.presenter.FolderChooserViewModel
 import com.nikolam.book_overview.folder_chooser.presenter.OperationMode
-import com.nikolam.book_overview.misc.NavManager
-import com.nikolam.book_overview.misc.viewmodel.BaseViewModel
+import com.nikolam.common.viewmodel.BaseAction
+import com.nikolam.common.viewmodel.BaseViewState
 import timber.log.Timber
-import java.io.File
 
-internal class FoldersOverviewViewModel (private val bookManager: BookManager, private  val navManager: NavManager)
-    : BaseViewModel<FoldersOverviewViewModel.ViewState, FoldersOverviewViewModel.Action>(ViewState()){
+internal class FoldersOverviewViewModel (private val bookManager: BookManager, private  val navManager: com.nikolam.common.NavManager)
+    : com.nikolam.common.viewmodel.BaseViewModel<FoldersOverviewViewModel.ViewState, FoldersOverviewViewModel.Action>(ViewState()){
 
     private lateinit var singleBookFolder: Set<String>
     private lateinit var collectionBookFolder: Set<String>

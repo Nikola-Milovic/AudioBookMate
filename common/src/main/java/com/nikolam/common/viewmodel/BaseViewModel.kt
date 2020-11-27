@@ -1,11 +1,9 @@
-package com.nikolam.book_overview.misc.viewmodel
+package com.nikolam.common.viewmodel
 
+import androidx.databinding.library.BuildConfig
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseAction
-import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseViewState
-import com.nikolam.book_overview.BuildConfig
 import kotlin.properties.Delegates
 
 @Suppress("detekt.UnsafeCast")

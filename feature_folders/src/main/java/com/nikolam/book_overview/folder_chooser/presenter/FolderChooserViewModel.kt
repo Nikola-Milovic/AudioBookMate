@@ -1,16 +1,10 @@
 package com.nikolam.book_overview.folder_chooser.presenter
 
 import android.annotation.SuppressLint
-import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseAction
-import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseViewState
 import com.nikolam.book_overview.BookManager
-import com.nikolam.book_overview.R
 import com.nikolam.book_overview.folder_chooser.data.StorageDirFinder
-import com.nikolam.book_overview.folders_overview.presenter.FoldersOverviewFragmentDirections
-import com.nikolam.book_overview.misc.FileRecognition
-import com.nikolam.book_overview.misc.NaturalOrderComparator
-import com.nikolam.book_overview.misc.NavManager
-import com.nikolam.book_overview.misc.viewmodel.BaseViewModel
+import com.nikolam.common.viewmodel.BaseAction
+import com.nikolam.common.viewmodel.BaseViewState
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
@@ -26,8 +20,8 @@ enum class OperationMode {
 internal class FolderChooserViewModel(
     private val storageDirFinder: StorageDirFinder,
     private val bookManager: BookManager,
-private val navManager: NavManager
-) : BaseViewModel<FolderChooserViewModel.ViewState, FolderChooserViewModel.Action>(ViewState()) {
+private val navManager: com.nikolam.common.NavManager
+) : com.nikolam.common.viewmodel.BaseViewModel<FolderChooserViewModel.ViewState, FolderChooserViewModel.Action>(ViewState()) {
 
     private val rootDirs = ArrayList<File>()
     private var chosenFile: File? = null
@@ -176,8 +170,8 @@ private fun File.closestFolder(): File = if (isDirectory) {
 }
 
 /** Gets the containing files of a folder (restricted to music and folders) in a naturally sorted order.  */
-private fun File.getContentsSorted() = listFilesSafely(FileRecognition.folderAndMusicFilter)
-    .sortedWith(NaturalOrderComparator.fileComparator)
+private fun File.getContentsSorted() = listFilesSafely(com.nikolam.common.FileRecognition.folderAndMusicFilter)
+    .sortedWith(com.nikolam.common.NaturalOrderComparator.fileComparator)
 
 /**
  * As there are cases where [File.listFiles] returns null even though it is a directory, we return

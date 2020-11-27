@@ -1,7 +1,5 @@
-package com.nikolam.book_overview.misc.viewmodel
+package com.nikolam.common.viewmodel
 
-import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseAction
-import com.igorwojda.showcase.library.base.presentation.viewmodel.BaseViewState
 import timber.log.Timber
 import kotlin.reflect.full.memberProperties
 

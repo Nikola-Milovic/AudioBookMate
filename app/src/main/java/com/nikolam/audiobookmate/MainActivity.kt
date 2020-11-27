@@ -1,18 +1,16 @@
 package com.nikolam.audiobookmate
 
-import android.Manifest
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.nikolam.book_overview.BookManager
-import com.nikolam.book_overview.misc.NavManager
-import com.nikolam.book_overview.misc.PermissionHelper
-import com.nikolam.book_overview.misc.Permissions
+import com.nikolam.common.NavManager
+import com.nikolam.common.PermissionHelper
+import com.nikolam.common.Permissions
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
-import pub.devrel.easypermissions.EasyPermissions
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -21,10 +19,10 @@ class MainActivity : AppCompatActivity() {
 
     private val navController get() = navHostFragment.findNavController()
 
-    private lateinit var permissions: Permissions
-    private lateinit var permissionHelper: PermissionHelper
+    private lateinit var permissions: com.nikolam.common.Permissions
+    private lateinit var permissionHelper: com.nikolam.common.PermissionHelper
 
-    private val navManager: NavManager by inject()
+    private val navManager: com.nikolam.common.NavManager by inject()
 
     private fun initNavManager() {
         navManager.setOnNavEvent {
@@ -47,8 +45,8 @@ class MainActivity : AppCompatActivity() {
         // hidden under virtual keyboard)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
-        permissions = Permissions(this)
-        permissionHelper = PermissionHelper(this, permissions)
+        permissions = com.nikolam.common.Permissions(this)
+        permissionHelper = com.nikolam.common.PermissionHelper(this, permissions)
 
         Timber.v("onCreate ${javaClass.simpleName}")
     }

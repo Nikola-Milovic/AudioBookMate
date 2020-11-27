@@ -1,4 +1,4 @@
-package com.nikolam.book_overview.misc
+package com.nikolam.common
 
 const val BOOK_COLLECTION = "collectionBooks"
 const val BOOK_SINGLE= "singleBooks"

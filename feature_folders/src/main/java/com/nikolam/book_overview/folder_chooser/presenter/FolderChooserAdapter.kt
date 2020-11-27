@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nikolam.book_overview.R
 import com.nikolam.book_overview.databinding.FolderChooserFolderItemBinding
-import com.nikolam.book_overview.misc.bindings
-import timber.log.Timber
+import com.nikolam.common.bindings
 import java.io.File
 
 class FolderChooserAdapter(

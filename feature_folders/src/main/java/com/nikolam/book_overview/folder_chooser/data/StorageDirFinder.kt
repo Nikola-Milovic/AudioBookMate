@@ -6,7 +6,7 @@ import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
 import androidx.annotation.RequiresPermission
-import com.nikolam.book_overview.misc.NaturalOrderComparator
+import com.nikolam.common.NaturalOrderComparator
 import timber.log.Timber
 import java.io.File
 import java.util.*
@@ -98,7 +98,7 @@ class StorageDirFinder (private val context: Context) {
             map[it.canonicalPath] = it
         }
         // sort them
-        val values = map.values.sortedWith(NaturalOrderComparator.fileComparator)
+        val values = map.values.sortedWith(com.nikolam.common.NaturalOrderComparator.fileComparator)
         return values
     }
 

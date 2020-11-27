@@ -1,6 +1,5 @@
 package com.nikolam.book_overview.folder_chooser.presenter
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikolam.book_overview.R
 import com.nikolam.book_overview.folder_chooser.di.storageModule
 import com.nikolam.book_overview.folder_chooser.di.viewModelModule
-import com.nikolam.book_overview.misc.observe
+import com.nikolam.common.observe
 import kotlinx.android.synthetic.main.folder_chooser_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules

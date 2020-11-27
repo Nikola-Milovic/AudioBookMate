@@ -2,8 +2,8 @@ package com.nikolam.book_overview
 
 import android.content.SharedPreferences
 import com.nikolam.book_overview.folder_chooser.presenter.OperationMode
-import com.nikolam.book_overview.misc.BOOK_COLLECTION
-import com.nikolam.book_overview.misc.BOOK_SINGLE
+import com.nikolam.common.BOOK_COLLECTION
+import com.nikolam.common.BOOK_SINGLE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -17,10 +17,10 @@ class BookManager(private val sharedPreferences: SharedPreferences){
 
     init{
         GlobalScope.launch(Dispatchers.IO) {
-            bookSingles = HashSet(sharedPreferences.getStringSet(BOOK_SINGLE, mutableSetOf()) ?: mutableSetOf())
+            bookSingles = HashSet(sharedPreferences.getStringSet(com.nikolam.common.BOOK_SINGLE, mutableSetOf()) ?: mutableSetOf())
         }
         GlobalScope.launch(Dispatchers.IO){
-            bookCollections = HashSet(sharedPreferences.getStringSet(BOOK_COLLECTION, mutableSetOf()) ?:  mutableSetOf())
+            bookCollections = HashSet(sharedPreferences.getStringSet(com.nikolam.common.BOOK_COLLECTION, mutableSetOf()) ?:  mutableSetOf())
         }
     }
 
@@ -52,8 +52,8 @@ class BookManager(private val sharedPreferences: SharedPreferences){
         Timber.d("Saved to preferences")
         GlobalScope.launch(Dispatchers.IO) {
             with(sharedPreferences.edit()) {
-                putStringSet(BOOK_SINGLE, bookSingles)
-                putStringSet(BOOK_COLLECTION, bookCollections)
+                putStringSet(com.nikolam.common.BOOK_SINGLE, bookSingles)
+                putStringSet(com.nikolam.common.BOOK_COLLECTION, bookCollections)
                 apply()
             }
         }

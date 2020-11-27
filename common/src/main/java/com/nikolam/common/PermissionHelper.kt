@@ -1,12 +1,8 @@
-package com.nikolam.book_overview.misc
+package com.nikolam.common
 
 import android.Manifest
 import android.app.Activity
-import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
 import android.view.View
-import com.nikolam.book_overview.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

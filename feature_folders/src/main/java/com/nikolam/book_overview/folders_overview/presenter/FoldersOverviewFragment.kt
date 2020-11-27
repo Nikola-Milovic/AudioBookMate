@@ -16,7 +16,7 @@ import com.nikolam.book_overview.R
 import com.nikolam.book_overview.folder_chooser.di.storageModule
 import com.nikolam.book_overview.folder_chooser.di.viewModelModule
 import com.nikolam.book_overview.folder_chooser.presenter.OperationMode
-import com.nikolam.book_overview.misc.observe
+import com.nikolam.common.observe
 import kotlinx.android.synthetic.main.folders_overview_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
