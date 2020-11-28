@@ -1,16 +1,16 @@
 package com.nikolam.book_overview.folders_overview.presenter
 
-import com.nikolam.book_overview.BookManager
+import com.nikolam.book_overview.FolderManager
 import com.nikolam.book_overview.folder_chooser.presenter.OperationMode
 import com.nikolam.common.viewmodel.BaseAction
 import com.nikolam.common.viewmodel.BaseViewState
 import timber.log.Timber
 
-internal class FoldersOverviewViewModel (private val bookManager: BookManager, private  val navManager: com.nikolam.common.NavManager)
+internal class FoldersOverviewViewModel (private val folderManager: FolderManager, private  val navManager: com.nikolam.common.NavManager)
     : com.nikolam.common.viewmodel.BaseViewModel<FoldersOverviewViewModel.ViewState, FoldersOverviewViewModel.Action>(ViewState()){
 
-    private lateinit var singleBookFolder: Set<String>
-    private lateinit var collectionBookFolder: Set<String>
+    private lateinit var singleBookFolder: HashSet<String>
+    private lateinit var collectionBookFolder: HashSet<String>
 
     override fun onReduceState(viewAction: Action) = when(viewAction) {
         is Action.FilesLoadingSuccess -> state.copy(
@@ -27,8 +27,8 @@ internal class FoldersOverviewViewModel (private val bookManager: BookManager, p
 
     override fun onLoadData() {
         super.onLoadData()
-        singleBookFolder = bookManager.provideBookSingleFolders()
-        collectionBookFolder = bookManager.provideBookCollectionFolders()
+        singleBookFolder = HashSet(folderManager.provideBookSingleFolders())
+        collectionBookFolder = HashSet(folderManager.provideBookCollectionFolders())
 
         val combinedFolders = singleBookFolder.plus(collectionBookFolder)
 
@@ -42,6 +42,15 @@ internal class FoldersOverviewViewModel (private val bookManager: BookManager, p
     fun startFolderChooserWithOperationMode(operationMode: OperationMode){
         val navDirections = FoldersOverviewFragmentDirections.actionFoldersOverviewFragmentToFolderChooserFragment(operationMode.toString())
         navManager.navigate(navDirections)
+    }
+
+    fun deleteFolder(folder : String){
+        folderManager.removeFolder(folder)
+        singleBookFolder.remove(folder)
+        collectionBookFolder.remove(folder)
+        val combinedFolders = singleBookFolder.plus(collectionBookFolder)
+
+        sendAction(Action.FilesLoadingSuccess( combinedFolders.toList()))
     }
 
 

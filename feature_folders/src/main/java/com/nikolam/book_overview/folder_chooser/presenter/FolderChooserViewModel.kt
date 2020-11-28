@@ -1,7 +1,7 @@
 package com.nikolam.book_overview.folder_chooser.presenter
 
 import android.annotation.SuppressLint
-import com.nikolam.book_overview.BookManager
+import com.nikolam.book_overview.FolderManager
 import com.nikolam.book_overview.folder_chooser.data.StorageDirFinder
 import com.nikolam.common.viewmodel.BaseAction
 import com.nikolam.common.viewmodel.BaseViewState
@@ -19,8 +19,8 @@ enum class OperationMode {
 
 internal class FolderChooserViewModel(
     private val storageDirFinder: StorageDirFinder,
-    private val bookManager: BookManager,
-private val navManager: com.nikolam.common.NavManager
+    private val folderManager: FolderManager,
+    private val navManager: com.nikolam.common.NavManager
 ) : com.nikolam.common.viewmodel.BaseViewModel<FolderChooserViewModel.ViewState, FolderChooserViewModel.Action>(ViewState()) {
 
     private val rootDirs = ArrayList<File>()
@@ -48,8 +48,8 @@ private val navManager: com.nikolam.common.NavManager
 
     override fun onLoadData() {
         super.onLoadData()
-        collectionBookFolder = bookManager.provideBookCollectionFolders()
-        singleBookFolder = bookManager.provideBookSingleFolders()
+        collectionBookFolder = folderManager.provideBookCollectionFolders()
+        singleBookFolder = folderManager.provideBookSingleFolders()
 
         Timber.d("SingleBooks chooser %s", singleBookFolder.toString())
         Timber.d("Collections chooser %s", collectionBookFolder.toString())
@@ -81,7 +81,7 @@ private val navManager: com.nikolam.common.NavManager
 
     private fun addFileAndTerminate(chosen: File) {
         if (canAddNewFolder(chosen.absolutePath)) {
-            bookManager.saveSelectedFolder(chosen.absolutePath, operationMode)
+            folderManager.saveSelectedFolder(chosen.absolutePath, operationMode)
         }
         goBackToPreviousScreen()
     }
@@ -147,6 +147,7 @@ private val navManager: com.nikolam.common.NavManager
         return true
     }
 
+    //TODO: pop the backstack
     fun goBackToPreviousScreen(){
         navManager.navigate(FolderChooserFragmentDirections.actionFolderChooserFragmentToFoldersOverviewFragment())
     }

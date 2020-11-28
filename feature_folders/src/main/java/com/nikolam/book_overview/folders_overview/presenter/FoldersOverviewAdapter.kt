@@ -10,7 +10,8 @@ import com.nikolam.book_overview.databinding.FolderOverviewFolderItemBinding
 import com.nikolam.common.bindings
 
 class FoldersOverviewAdapter(
-    private val c: Context
+    private val c: Context,
+    private val listener : FolderOverviewItemListener
 ) : RecyclerView.Adapter<FoldersOverviewAdapter.FolderViewholder>() {
 
     override fun onBindViewHolder(holder: FolderViewholder, position: Int) {
@@ -45,8 +46,16 @@ class FoldersOverviewAdapter(
     ) : RecyclerView.ViewHolder(view) {
 
         private val binding : FolderOverviewFolderItemBinding by bindings(view)
+        private var file : String = ""
+
+        init{
+            binding.remove.setOnClickListener {
+                listener.deleteFolder(file)
+            }
+        }
 
         fun bind(fileDir: String) {
+            file = fileDir
             binding.apply {
                 folderName = fileDir
                // Timber.d("FOlder name %s", fileDir)

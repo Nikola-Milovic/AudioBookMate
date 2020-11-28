@@ -9,7 +9,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class BookManager(private val sharedPreferences: SharedPreferences){
+class FolderManager(private val sharedPreferences: SharedPreferences){
 
 
     private lateinit var bookSingles : MutableSet<String>
@@ -46,6 +46,12 @@ class BookManager(private val sharedPreferences: SharedPreferences){
 
     fun provideBookSingleFolders() : Set<String>{
         return bookSingles
+    }
+
+    fun removeFolder(f : String) {
+        bookCollections.remove(f)
+        bookSingles.remove(f)
+        saveBookFoldersPreferences()
     }
 
     private fun saveBookFoldersPreferences(){

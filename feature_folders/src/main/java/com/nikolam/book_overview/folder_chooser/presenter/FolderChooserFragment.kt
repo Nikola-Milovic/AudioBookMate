@@ -66,7 +66,7 @@ class FolderChooserFragment : Fragment() {
         adapter = FolderChooserAdapter(requireContext(), OperationMode.COLLECTION_BOOK) { file ->
             viewModel.fileSelected(file)
         }
-
+        //TODO: add spinner and storage selector
         folder_chooser_recyclerView.layoutManager = LinearLayoutManager(requireContext())
         folder_chooser_recyclerView.addItemDecoration(
             DividerItemDecoration(

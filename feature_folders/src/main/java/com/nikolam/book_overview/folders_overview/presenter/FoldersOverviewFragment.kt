@@ -22,7 +22,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
-class FoldersOverviewFragment : Fragment() {
+class FoldersOverviewFragment : Fragment(), FolderOverviewItemListener {
 
 
     private val viewModel: FoldersOverviewViewModel by viewModel()
@@ -45,7 +45,7 @@ class FoldersOverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = FoldersOverviewAdapter(requireContext())
+        adapter = FoldersOverviewAdapter(requireContext(), this)
 
         folders_overview_recyclerView.layoutManager = LinearLayoutManager(requireContext())
         folders_overview_recyclerView.addItemDecoration(
@@ -83,6 +83,10 @@ class FoldersOverviewFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         unloadKoinModules(listOf(viewModelModule, storageModule))
+    }
+
+    override fun deleteFolder(folder: String) {
+        viewModel.deleteFolder(folder)
     }
 
 }
