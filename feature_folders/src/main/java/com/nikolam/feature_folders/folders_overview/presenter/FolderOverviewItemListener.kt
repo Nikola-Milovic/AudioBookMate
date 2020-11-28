@@ -1,4 +1,4 @@
-package com.nikolam.book_overview.folders_overview.presenter
+package com.nikolam.feature_folders.folders_overview.presenter
 
 interface FolderOverviewItemListener {
     fun deleteFolder(folder : String)

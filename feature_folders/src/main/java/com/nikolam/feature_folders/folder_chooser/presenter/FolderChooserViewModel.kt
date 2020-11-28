@@ -1,8 +1,9 @@
-package com.nikolam.book_overview.folder_chooser.presenter
+package com.nikolam.feature_folders.folder_chooser.presenter
 
 import android.annotation.SuppressLint
-import com.nikolam.book_overview.FolderManager
-import com.nikolam.book_overview.folder_chooser.data.StorageDirFinder
+import com.nikolam.common.navigation.NavManager
+import com.nikolam.feature_folders.FolderManager
+import com.nikolam.feature_folders.folder_chooser.data.StorageDirFinder
 import com.nikolam.common.viewmodel.BaseAction
 import com.nikolam.common.viewmodel.BaseViewState
 import timber.log.Timber
@@ -20,7 +21,7 @@ enum class OperationMode {
 internal class FolderChooserViewModel(
     private val storageDirFinder: StorageDirFinder,
     private val folderManager: FolderManager,
-    private val navManager: com.nikolam.common.NavManager
+    private val navManager: NavManager
 ) : com.nikolam.common.viewmodel.BaseViewModel<FolderChooserViewModel.ViewState, FolderChooserViewModel.Action>(ViewState()) {
 
     private val rootDirs = ArrayList<File>()
@@ -48,11 +49,9 @@ internal class FolderChooserViewModel(
 
     override fun onLoadData() {
         super.onLoadData()
+
         collectionBookFolder = folderManager.provideBookCollectionFolders()
         singleBookFolder = folderManager.provideBookSingleFolders()
-
-        Timber.d("SingleBooks chooser %s", singleBookFolder.toString())
-        Timber.d("Collections chooser %s", collectionBookFolder.toString())
 
         refreshRootDirs()
     }
@@ -62,11 +61,25 @@ internal class FolderChooserViewModel(
         Timber.d("Operation mode is %s", operationMode.toString())
     }
 
+    //TODO: pop the backstack
+    fun goBackToPreviousScreen(){
+        navManager.navigate(FolderChooserFragmentDirections.actionFolderChooserFragmentToFoldersOverviewFragment())
+    }
+
+    fun fileChosen() {
+        addFileAndTerminate(chosenFile!!)
+    }
+
+    fun fileSelected(selectedFile: File?) {
+        chosenFile = selectedFile
+        showNewData(selectedFile?.closestFolder()?.getContentsSorted() ?: emptyList(),
+            selectedFile?.toString() ?: "")
+    }
+
     @SuppressLint("MissingPermission")
     private fun refreshRootDirs() {
         rootDirs.clear()
         rootDirs.addAll(storageDirFinder.storageDirs())
-        //setChooseButtonEnabled(rootDirs.isNotEmpty())
 
         when {
             chosenFile != null -> fileSelected(chosenFile)
@@ -75,15 +88,11 @@ internal class FolderChooserViewModel(
         }
     }
 
-    fun fileChosen() {
-        addFileAndTerminate(chosenFile!!)
-    }
-
     private fun addFileAndTerminate(chosen: File) {
         if (canAddNewFolder(chosen.absolutePath)) {
             folderManager.saveSelectedFolder(chosen.absolutePath, operationMode)
+            goBackToPreviousScreen()
         }
-        goBackToPreviousScreen()
     }
 
     private fun canGoBack(): Boolean {
@@ -103,12 +112,6 @@ internal class FolderChooserViewModel(
         } else {
             false
         }
-    }
-
-    fun fileSelected(selectedFile: File?) {
-        chosenFile = selectedFile
-        showNewData(selectedFile?.closestFolder()?.getContentsSorted() ?: emptyList(),
-            selectedFile?.toString() ?: "")
     }
 
     private fun showNewData(newData: List<File>, name: String) {
@@ -145,11 +148,6 @@ internal class FolderChooserViewModel(
         }
 
         return true
-    }
-
-    //TODO: pop the backstack
-    fun goBackToPreviousScreen(){
-        navManager.navigate(FolderChooserFragmentDirections.actionFolderChooserFragmentToFoldersOverviewFragment())
     }
 
     internal data

@@ -1,4 +1,4 @@
-package com.nikolam.common
+package com.nikolam.common.utils
 
 import android.view.View
 import androidx.databinding.DataBindingUtil

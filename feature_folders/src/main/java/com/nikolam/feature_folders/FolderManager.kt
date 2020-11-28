@@ -1,16 +1,13 @@
-package com.nikolam.book_overview
+package com.nikolam.feature_folders
 
 import android.content.SharedPreferences
-import com.nikolam.book_overview.folder_chooser.presenter.OperationMode
-import com.nikolam.common.BOOK_COLLECTION
-import com.nikolam.common.BOOK_SINGLE
+import com.nikolam.feature_folders.folder_chooser.presenter.OperationMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class FolderManager(private val sharedPreferences: SharedPreferences){
-
 
     private lateinit var bookSingles : MutableSet<String>
     private lateinit var bookCollections: MutableSet<String>
@@ -34,10 +31,6 @@ class FolderManager(private val sharedPreferences: SharedPreferences){
             }
         }
         saveBookFoldersPreferences()
-    }
-
-    fun provideBookFolders() : Set<String>{
-        return bookSingles.plus(bookCollections)
     }
 
     fun provideBookCollectionFolders() : Set<String>{

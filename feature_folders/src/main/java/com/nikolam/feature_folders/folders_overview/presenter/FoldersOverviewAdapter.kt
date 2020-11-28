@@ -1,16 +1,15 @@
-package com.nikolam.book_overview.folders_overview.presenter
+package com.nikolam.feature_folders.folders_overview.presenter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.nikolam.book_overview.R
-import com.nikolam.book_overview.databinding.FolderOverviewFolderItemBinding
-import com.nikolam.common.bindings
+import com.nikolam.feature_folders.R
+import com.nikolam.feature_folders.databinding.FolderOverviewFolderItemBinding
+import com.nikolam.common.utils.bindings
 
 class FoldersOverviewAdapter(
-    private val c: Context,
     private val listener : FolderOverviewItemListener
 ) : RecyclerView.Adapter<FoldersOverviewAdapter.FolderViewholder>() {
 

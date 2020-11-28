@@ -1,4 +1,4 @@
-package com.nikolam.book_overview.folder_chooser.data
+package com.nikolam.feature_folders.folder_chooser.data
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -6,7 +6,6 @@ import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
 import androidx.annotation.RequiresPermission
-import com.nikolam.common.NaturalOrderComparator
 import timber.log.Timber
 import java.io.File
 import java.util.*

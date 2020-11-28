@@ -69,6 +69,5 @@ dependencies {
     implementation(project(":feature_folders"))
     implementation(project(":common"))
 
-
     addTestDependencies()
 }

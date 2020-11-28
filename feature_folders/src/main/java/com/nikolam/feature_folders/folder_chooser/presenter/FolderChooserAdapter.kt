@@ -1,17 +1,16 @@
-package com.nikolam.book_overview.folder_chooser.presenter
+package com.nikolam.feature_folders.folder_chooser.presenter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.nikolam.book_overview.R
-import com.nikolam.book_overview.databinding.FolderChooserFolderItemBinding
-import com.nikolam.common.bindings
+import com.nikolam.feature_folders.R
+import com.nikolam.feature_folders.databinding.FolderChooserFolderItemBinding
+import com.nikolam.common.utils.bindings
 import java.io.File
 
 class FolderChooserAdapter(
-    private val c: Context,
     private val mode: OperationMode,
     private val listener: (selected: File) -> Unit
 ) : RecyclerView.Adapter<FolderChooserAdapter.FolderViewholder>() {

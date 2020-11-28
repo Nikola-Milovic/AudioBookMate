@@ -1,4 +1,4 @@
-package com.nikolam.book_overview
+package com.nikolam.feature_folders
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

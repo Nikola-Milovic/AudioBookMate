@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/folderChooserFragment"
-        android:name="com.nikolam.book_overview.folder_chooser.presenter.FolderChooserFragment"
+        android:name="com.nikolam.feature_folders.folder_chooser.presenter.FolderChooserFragment"
         android:label="FolderChooserFragment" >
         <argument
             android:name="operationMode"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/foldersOverviewFragment"
-        android:name="com.nikolam.book_overview.folders_overview.presenter.FoldersOverviewFragment"
+        android:name="com.nikolam.feature_folders.folders_overview.presenter.FoldersOverviewFragment"
         android:label="FoldersOverviewFragment" >
         <action
             android:id="@+id/action_foldersOverviewFragment_to_folderChooserFragment"

@@ -1,4 +1,4 @@
-package com.nikolam.common
+package com.nikolam.common.permissions
 
 import android.Manifest
 import android.app.Activity

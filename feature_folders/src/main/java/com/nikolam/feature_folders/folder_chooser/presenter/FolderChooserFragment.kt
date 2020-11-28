@@ -1,4 +1,4 @@
-package com.nikolam.book_overview.folder_chooser.presenter
+package com.nikolam.feature_folders.folder_chooser.presenter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,10 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nikolam.book_overview.R
-import com.nikolam.book_overview.folder_chooser.di.storageModule
-import com.nikolam.book_overview.folder_chooser.di.viewModelModule
-import com.nikolam.common.observe
+import com.nikolam.feature_folders.R
+import com.nikolam.feature_folders.di.storageModule
+import com.nikolam.feature_folders.di.viewModelModule
+import com.nikolam.common.extensions.observe
 import kotlinx.android.synthetic.main.folder_chooser_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
@@ -30,12 +30,12 @@ class FolderChooserFragment : Fragment() {
 
     lateinit var callback : OnBackPressedCallback
 
-    val args: FolderChooserFragmentArgs by navArgs()
+    private val args: FolderChooserFragmentArgs by navArgs()
 
     private val stateObserver = Observer<FolderChooserViewModel.ViewState> {
         adapter.newData(it.files)
         choose_button.isEnabled = !it.isError
-        currentFolder.text = it.currentFolderName
+        current_folder_textView.text = it.currentFolderName
         setUpButtonEnabled(it.upButtonEnabled)
     }
 
@@ -56,14 +56,10 @@ class FolderChooserFragment : Fragment() {
         return inflater.inflate(R.layout.folder_chooser_fragment, container, false)
     }
 
-    fun onBackPressed() {
-        callback.isEnabled = viewModel.backConsumed()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = FolderChooserAdapter(requireContext(), OperationMode.COLLECTION_BOOK) { file ->
+        adapter = FolderChooserAdapter(OperationMode.COLLECTION_BOOK) { file ->
             viewModel.fileSelected(file)
         }
         //TODO: add spinner and storage selector
@@ -79,7 +75,7 @@ class FolderChooserFragment : Fragment() {
             viewModel.fileChosen()
         }
 
-        upButton.setOnClickListener {
+        go_up_button.setOnClickListener {
             onBackPressed()
         }
 
@@ -97,15 +93,18 @@ class FolderChooserFragment : Fragment() {
         viewModel.loadData()
     }
 
-    fun setUpButtonEnabled(upEnabled: Boolean) {
-        upButton.isEnabled = upEnabled
-        val upIcon = if (upEnabled) getDrawable(requireContext(), R.drawable.ic_arrow_upward)!! else null
-        upButton.setImageDrawable(upIcon)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         unloadKoinModules(listOf(viewModelModule, storageModule))
     }
 
+    private fun setUpButtonEnabled(upEnabled: Boolean) {
+        go_up_button.isEnabled = upEnabled
+        val upIcon = if (upEnabled) getDrawable(requireContext(), R.drawable.ic_arrow_upward)!! else null
+        go_up_button.setImageDrawable(upIcon)
+    }
+
+    private fun onBackPressed() {
+        callback.isEnabled = viewModel.backConsumed()
+    }
 }

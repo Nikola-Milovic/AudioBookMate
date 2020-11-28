@@ -1,4 +1,4 @@
-package com.nikolam.book_overview.folders_overview.presenter
+package com.nikolam.feature_folders.folders_overview.presenter
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -12,11 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nikolam.book_overview.R
-import com.nikolam.book_overview.folder_chooser.di.storageModule
-import com.nikolam.book_overview.folder_chooser.di.viewModelModule
-import com.nikolam.book_overview.folder_chooser.presenter.OperationMode
-import com.nikolam.common.observe
+import com.nikolam.feature_folders.R
+import com.nikolam.feature_folders.di.storageModule
+import com.nikolam.feature_folders.di.viewModelModule
+import com.nikolam.feature_folders.folder_chooser.presenter.OperationMode
+import com.nikolam.common.extensions.observe
 import kotlinx.android.synthetic.main.folders_overview_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
@@ -28,8 +28,6 @@ class FoldersOverviewFragment : Fragment(), FolderOverviewItemListener {
     private val viewModel: FoldersOverviewViewModel by viewModel()
 
     private lateinit var adapter: FoldersOverviewAdapter
-
-    lateinit var callback: OnBackPressedCallback
 
     private val stateObserver = Observer<FoldersOverviewViewModel.ViewState> {
         adapter.newData(it.files)
@@ -45,7 +43,7 @@ class FoldersOverviewFragment : Fragment(), FolderOverviewItemListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = FoldersOverviewAdapter(requireContext(), this)
+        adapter = FoldersOverviewAdapter(this)
 
         folders_overview_recyclerView.layoutManager = LinearLayoutManager(requireContext())
         folders_overview_recyclerView.addItemDecoration(

@@ -1,4 +1,4 @@
-package com.nikolam.common
+package com.nikolam.common.extensions
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

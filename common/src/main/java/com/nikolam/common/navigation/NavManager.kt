@@ -1,4 +1,4 @@
-package com.nikolam.common
+package com.nikolam.common.navigation
 
 import androidx.navigation.NavDirections
 
