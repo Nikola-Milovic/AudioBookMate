@@ -35,7 +35,8 @@ private val navManager: com.nikolam.common.NavManager
             isLoading = false,
             isError = false,
             files = viewAction.files,
-            currentFolderName = viewAction.name
+            currentFolderName = viewAction.name,
+            upButtonEnabled = canGoBack()
         )
         is Action.FilesLoadingFailure -> state.copy(
             isLoading = false,
@@ -82,7 +83,7 @@ private val navManager: com.nikolam.common.NavManager
         if (canAddNewFolder(chosen.absolutePath)) {
             bookManager.saveSelectedFolder(chosen.absolutePath, operationMode)
         }
-        navManager.navigate(FolderChooserFragmentDirections.actionFolderChooserFragmentToFoldersOverviewFragment())
+        goBackToPreviousScreen()
     }
 
     private fun canGoBack(): Boolean {
@@ -107,7 +108,7 @@ private val navManager: com.nikolam.common.NavManager
     fun fileSelected(selectedFile: File?) {
         chosenFile = selectedFile
         showNewData(selectedFile?.closestFolder()?.getContentsSorted() ?: emptyList(),
-            selectedFile?.name ?: "")
+            selectedFile?.toString() ?: "")
     }
 
     private fun showNewData(newData: List<File>, name: String) {
@@ -146,12 +147,17 @@ private val navManager: com.nikolam.common.NavManager
         return true
     }
 
+    fun goBackToPreviousScreen(){
+        navManager.navigate(FolderChooserFragmentDirections.actionFolderChooserFragmentToFoldersOverviewFragment())
+    }
+
     internal data
     class ViewState(
         val isLoading: Boolean = true,
         val isError: Boolean = false,
         val files: List<File> = listOf(),
-        val currentFolderName: String = ""
+        val currentFolderName: String = "",
+        val upButtonEnabled : Boolean = false
     ) : BaseViewState
 
     internal sealed class Action : BaseAction {

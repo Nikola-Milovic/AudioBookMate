@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -34,6 +35,8 @@ class FolderChooserFragment : Fragment() {
     private val stateObserver = Observer<FolderChooserViewModel.ViewState> {
         adapter.newData(it.files)
         choose_button.isEnabled = !it.isError
+        currentFolder.text = it.currentFolderName
+        setUpButtonEnabled(it.upButtonEnabled)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,18 +77,30 @@ class FolderChooserFragment : Fragment() {
 
         choose_button.setOnClickListener{
             viewModel.fileChosen()
-//            val fm = requireActivity()
-//                .supportFragmentManager.popBackStackImmediate()
+        }
+
+        upButton.setOnClickListener {
+            onBackPressed()
         }
 
         abort_button.setOnClickListener {
+            viewModel.goBackToPreviousScreen()
+        }
 
+        toolbar.setNavigationOnClickListener {
+            viewModel.goBackToPreviousScreen()
         }
 
         folder_chooser_recyclerView.adapter = adapter
 
         observe(viewModel.stateLiveData, stateObserver)
         viewModel.loadData()
+    }
+
+    fun setUpButtonEnabled(upEnabled: Boolean) {
+        upButton.isEnabled = upEnabled
+        val upIcon = if (upEnabled) getDrawable(requireContext(), R.drawable.ic_arrow_upward)!! else null
+        upButton.setImageDrawable(upIcon)
     }
 
     override fun onDestroy() {
