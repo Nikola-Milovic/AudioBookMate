@@ -6,7 +6,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 Define common dependencies, so they can be easily updated across feature modules
  */
 fun DependencyHandler.addTestDependencies() {
-    //   testImplementation(project(ModuleDependency.LIBRARY_TEST_UTILS))
+    testImplementation(project(":library_test_utils"))
 
     testImplementation(TestLibraryDependency.JUNIT)
     androidTestImplementation(TestLibraryDependency.TEST_RUNNER)
@@ -16,6 +16,8 @@ fun DependencyHandler.addTestDependencies() {
     testImplementation(TestLibraryDependency.MOCKITO_KOTLIN)
     testImplementation(TestLibraryDependency.COROUTINES_TEST)
     testImplementation(TestLibraryDependency.ANDROID_X_CORE_TESTING)
+    testImplementation(TestLibraryDependency.KLUENT)
+    androidTestImplementation(TestLibraryDependency.KLUENT_ANDROID)
 
     debugImplementation(TestLibraryDependency.FRAGMENT_TESTING)
 
@@ -31,7 +33,7 @@ fun DependencyHandler.addTestDependencies() {
 /*
  * These extensions mimic the extensions that are generated on the fly by Gradle.
  * They are used here to provide above dependency syntax that mimics Gradle Kotlin DSL
- * syntax in module\build.gradle.kts.kts.kts files.
+ * syntax in module\build.gradle.kts files.
  */
 // fix from https://github.com/igorwojda/android-showcase
 @Suppress("detekt.UnusedPrivateMember")

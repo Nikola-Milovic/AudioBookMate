@@ -1,4 +1,4 @@
-package com.nikolam.feature_folders
+package com.nikolam.library_test_utils
 
 import org.junit.Test
 

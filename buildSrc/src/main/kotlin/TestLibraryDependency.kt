@@ -6,13 +6,9 @@ private object TestLibraryVersion {
     const val MOCKITO = "3.2.4"
     const val MOCKITO_KOTLIN = "2.2.0"
     const val ANDROID_X_TEST = "2.1.0"
-
     const val FRAGMENT_VERSION = "1.2.5"
-
     const val KAKAO = "2.3.4"
-
     const val DATABINDING = "3.5.3"
-
     const val NAVIGATION = "2.3.0"
 }
 
