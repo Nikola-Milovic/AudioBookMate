@@ -67,6 +67,7 @@ dependencies {
 
     implementation(project(":feature_player"))
     implementation(project(":feature_folders"))
+    implementation(project(":feature_books"))
     implementation(project(":common"))
 
     addTestDependencies()
