@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(layoutResId)
 
-        val folderManager : FolderManager = get()
+        val folderManager: FolderManager = get()
 
         supportActionBar?.hide()
 
@@ -51,13 +51,11 @@ class MainActivity : AppCompatActivity() {
         Timber.v("onCreate ${javaClass.simpleName}")
     }
 
-
     override fun onStart() {
         super.onStart()
         // permissions
-        permissionHelper.storagePermission { Timber.d("Got permission for storage")}
+        permissionHelper.storagePermission { Timber.d("Got permission for storage") }
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -67,5 +65,4 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         this.permissions.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
-
 }

@@ -19,7 +19,7 @@ abstract class BaseViewModel<ViewState : BaseViewState, ViewAction : BaseAction>
 
     init {
         if (BuildConfig.DEBUG) {
-            //stateTimeTravelDebugger = StateTimeTravelDebugger(this::class.java.simpleName)
+            // stateTimeTravelDebugger = StateTimeTravelDebugger(this::class.java.simpleName)
         }
     }
 

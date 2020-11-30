@@ -18,7 +18,7 @@ class AudioBookMateApplication : Application() {
             androidContext(this@AudioBookMateApplication)
         }
 
-        loadKoinModules(listOf(navigationModule,commonModule))
+        loadKoinModules(listOf(navigationModule, commonModule))
         // This will initialise Timber
         // This will initialise Timber
         if (BuildConfig.DEBUG) {

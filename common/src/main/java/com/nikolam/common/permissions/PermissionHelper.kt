@@ -11,28 +11,28 @@ private const val PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE
 
 class PermissionHelper(private val activity: Activity, private val permissions: Permissions) {
 
-  fun storagePermission(gotPermission: () -> Unit = {}) {
-    val root = activity.findViewById<View>(android.R.id.content)
-    @Suppress("CheckResult")
-    GlobalScope.launch(Dispatchers.Main) {
-      when (permissions.request(PERMISSION)) {
-        Permissions.PermissionResult.GRANTED -> gotPermission()
-      //  Permissions.PermissionResult.DENIED_FOREVER -> handleDeniedForever(root)
-        Permissions.PermissionResult.DENIED_ASK_AGAIN -> showRationale(root) {
-          storagePermission(gotPermission)
+    fun storagePermission(gotPermission: () -> Unit = {}) {
+        val root = activity.findViewById<View>(android.R.id.content)
+        @Suppress("CheckResult")
+        GlobalScope.launch(Dispatchers.Main) {
+            when (permissions.request(PERMISSION)) {
+              Permissions.PermissionResult.GRANTED -> gotPermission()
+                //  Permissions.PermissionResult.DENIED_FOREVER -> handleDeniedForever(root)
+              Permissions.PermissionResult.DENIED_ASK_AGAIN -> showRationale(root) {
+                storagePermission(gotPermission)
+              }
+            }
         }
-      }
     }
-  }
 
-  private fun showRationale(root: View, listener: () -> Unit) {
+    private fun showRationale(root: View, listener: () -> Unit) {
 //    BetterSnack.make(
 //      root = root,
 //      text = root.context.getString(R.string.permission_external_new_explanation),
 //      action = root.context.getString(R.string.permission_retry),
 //      listener = listener
 //    )
-  }
+    }
 
 //  private fun handleDeniedForever(root: View) {
 //    val context = root.context

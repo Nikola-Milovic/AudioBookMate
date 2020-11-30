@@ -6,9 +6,9 @@ import com.nikolam.audiobookmate.BuildConfig
 import com.nikolam.feature_folders.FolderManager
 import org.koin.dsl.module
 
-val commonModule = module{
-    single{ FolderManager(get()) }
-    single{ provideSharedPreferences(get()) }
+val commonModule = module {
+    single { FolderManager(get()) }
+    single { provideSharedPreferences(get()) }
 }
 
 fun provideSharedPreferences(context: Context): SharedPreferences {

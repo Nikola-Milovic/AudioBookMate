@@ -18,50 +18,54 @@ private const val REQUEST_CODE = 1512
  */
 class Permissions(private val activity: Activity) {
 
-  private val permissionChannel = BroadcastChannel<Array<String>>(1)
+    private val permissionChannel = BroadcastChannel<Array<String>>(1)
 
-  suspend fun request(permission: String): PermissionResult {
-    return if (activity.hasPermission(permission)) {
-        PermissionResult.GRANTED
-    } else {
-      permissionChannel.asFlow()
-        .onStart {
-          ActivityCompat.requestPermissions(
-            activity,
-            arrayOf(permission),
-            REQUEST_CODE
-          )
+    suspend fun request(permission: String): PermissionResult {
+        return if (activity.hasPermission(permission)) {
+            PermissionResult.GRANTED
+        } else {
+            permissionChannel.asFlow()
+                .onStart {
+                    ActivityCompat.requestPermissions(
+                      activity,
+                      arrayOf(permission),
+                      REQUEST_CODE
+                    )
+                }
+                .filter { it.contains(permission) }
+                .first()
+
+            when {
+                activity.hasPermission(permission) -> PermissionResult.GRANTED
+                showRationale(permission) -> PermissionResult.DENIED_ASK_AGAIN
+                else -> PermissionResult.DENIED_FOREVER
+            }
         }
-        .filter { it.contains(permission) }
-        .first()
-
-      when {
-        activity.hasPermission(permission) -> PermissionResult.GRANTED
-        showRationale(permission) -> PermissionResult.DENIED_ASK_AGAIN
-        else -> PermissionResult.DENIED_FOREVER
-      }
     }
-  }
 
-  @Suppress("UNUSED_PARAMETER")
-  fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-    if (requestCode == REQUEST_CODE) {
-      permissionChannel.offer(permissions)
+    @Suppress("UNUSED_PARAMETER")
+    fun onRequestPermissionsResult(
+      requestCode: Int,
+      permissions: Array<String>,
+      grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_CODE) {
+            permissionChannel.offer(permissions)
+        }
     }
-  }
 
-  private fun showRationale(permission: String): Boolean {
-    return ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)
-  }
+    private fun showRationale(permission: String): Boolean {
+        return ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)
+    }
 
-  enum class PermissionResult {
-    GRANTED,
-    DENIED_FOREVER,
-    DENIED_ASK_AGAIN
-  }
+    enum class PermissionResult {
+        GRANTED,
+        DENIED_FOREVER,
+        DENIED_ASK_AGAIN
+    }
 }
 
 fun Context.hasPermission(permission: String): Boolean {
-  val permissionResult = ContextCompat.checkSelfPermission(this, permission)
-  return permissionResult == PackageManager.PERMISSION_GRANTED
+    val permissionResult = ContextCompat.checkSelfPermission(this, permission)
+    return permissionResult == PackageManager.PERMISSION_GRANTED
 }
