@@ -1,12 +1,14 @@
 package com.nikolam.feature_folders.folder_chooser
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.nikolam.common.navigation.NavManager
 import com.nikolam.feature_folders.FolderManager
 import com.nikolam.feature_folders.folder_chooser.data.StorageDirFinder
 import com.nikolam.feature_folders.folder_chooser.presenter.FolderChooserViewModel
+import com.nikolam.feature_folders.folder_chooser.presenter.OperationMode
 import com.nikolam.library_test_utils.CoroutineRule
 import com.nikolam.library_test_utils.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -50,20 +52,37 @@ class FolderChooserViewModelTest {
     }
 
     @Test
-    fun `when successfully loading data, state will be correctly populated`() {
+    fun `when folder is chosen, will save the folder if not already saved`() {
        //setup
-//        whenever(folderManager.provideBookCollectionFolders()).thenReturn(setOf("folder1", "folder2"))
-//        whenever(folderManager.provideBookSingleFolders()).thenReturn(setOf("folder3"))
-        whenever(dirFinder.storageDirs()).thenReturn(listOf(File("dir1"), File("dir2"), File("dir3")))
+        val file = File("par", "child")
+        val op = OperationMode.COLLECTION_BOOK
+
 
         // when
         cut.loadData()
-
-        val state = cut.stateLiveData.getOrAwaitValue()
+        cut.setOperationMode(op)
+        cut.fileSelected(file)
+        cut.fileChosen()
 
         // then
-        state.isError `should be equal to` false
-        state.isLoading `should be equal to` false
-        state.files `should be equal to` setOf("dir1", "dir2", "dir3")
+        verify(folderManager, times(1)).saveSelectedFolder(file.absolutePath, op)
     }
+
+    @Test
+    fun `when folder is chosen, will not save the folder if already saved`() {
+        //setup
+        val file = File("par", "child")
+        whenever(folderManager.provideBookCollectionFolders()).thenReturn (setOf(file.absolutePath))
+        val op = OperationMode.COLLECTION_BOOK
+
+        // when
+        cut.loadData()
+        cut.setOperationMode(op)
+        cut.fileSelected(file)
+        cut.fileChosen()
+
+        // then
+        verify(folderManager, times(0)).saveSelectedFolder(file.absolutePath, op)
+    }
+
 }
