@@ -6,7 +6,6 @@ private object LibraryVersion {
     const val APP_COMPACT = "1.1.0"
     const val RECYCLER_VIEW = "1.2.0-alpha05"
     const val COORDINATOR_LAYOUT = "1.1.0"
-
     // 1.1.x version is required in order to support the dark theme functionality in
     // Android Q(adds Theme.MaterialComponents.DayNight)
     const val MATERIAL = "1.1.0-alpha09"
@@ -16,27 +15,21 @@ private object LibraryVersion {
     const val LIFECYCLE = "2.2.0"
     const val LIFECYCLE_VIEW_MODEL_KTX = "2.2.0"
     const val ANDROID_LEGACY_SUPPORT = "1.0.0"
-
     //Glide
     const val GLIDE = "4.11.0"
-
     //Koin
     const val KOIN = "2.2.0"
-
     const val EASY_PERMISSION = "3.0.0"
-
     const val FLOATING_ACTION_BUTTON = "1.10.1"
+    const val ROOM = "2.2.5"
 }
 
 object LibraryDependency {
     const val KOTLIN = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${CoreVersion.KOTLIN}"
-
     // Required by Android dynamic feature modules and SafeArgs
     const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:${CoreVersion.KOTLIN}"
-
     const val TIMBER = "com.jakewharton.timber:timber:${LibraryVersion.TIMBER}"
     const val PLAY_CORE = "com.google.android.play:core:${LibraryVersion.PLAY_CORE}"
-
     const val COROUTINES_ANDROID =
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:${CoreVersion.COROUTINES_ANDROID}"
     const val CORE_KTX = "androidx.core:core-ktx:${LibraryVersion.CORE_KTX}"
@@ -48,6 +41,7 @@ object LibraryDependency {
     const val RECYCLER_VIEW = "androidx.recyclerview:recyclerview:${LibraryVersion.RECYCLER_VIEW}"
     const val MATERIAL = "com.google.android.material:material:${LibraryVersion.MATERIAL}"
     const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${LibraryVersion.FRAGMENT_KTX}"
+    const val FLOATING_ACTION_BUTTON = "com.getbase:floatingactionbutton:${LibraryVersion.FLOATING_ACTION_BUTTON}"
 
     //Glide
     const val GLIDE = "com.github.bumptech.glide:glide:${LibraryVersion.GLIDE}"
@@ -60,7 +54,6 @@ object LibraryDependency {
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${LibraryVersion.LIFECYCLE_VIEW_MODEL_KTX}"
     const val ANDROID_LEGACY_SUPPORT =
             "androidx.legacy:legacy-support-v4:${LibraryVersion.ANDROID_LEGACY_SUPPORT}"
-
 
     const val NAVIGATION_FRAGMENT_KTX =
             "androidx.navigation:navigation-fragment-ktx:${CoreVersion.NAVIGATION}"
@@ -76,5 +69,10 @@ object LibraryDependency {
 
     const val EASY_PERMISSION = "pub.devrel:easypermissions:${LibraryVersion.EASY_PERMISSION}"
 
-    const val FLOATING_ACTION_BUTTON = "com.getbase:floatingactionbutton:${LibraryVersion.FLOATING_ACTION_BUTTON}"
+    //Room
+    const val ROOM_RUNTIME = "androidx.room:room-runtime:${LibraryVersion.ROOM}"
+    const val ROOM_COMPILER = "androidx.room:room-compiler:${LibraryVersion.ROOM}"
+    const val ROOM_KTX = "androidx.room:room-ktx:${LibraryVersion.ROOM}"
+
+
 }

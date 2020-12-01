@@ -65,6 +65,10 @@ dependencies {
 
     implementation(LibraryDependency.FLOATING_ACTION_BUTTON)
 
+    implementation(LibraryDependency.ROOM_COMPILER)
+    implementation(LibraryDependency.ROOM_KTX)
+    kapt(LibraryDependency.ROOM_COMPILER)
+
     implementation(project(":common"))
 
     addTestDependencies()

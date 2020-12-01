@@ -5,16 +5,20 @@ import com.nikolam.common.BOOK_COLLECTION
 import com.nikolam.common.BOOK_SINGLE
 import com.nikolam.common.FileRecognition
 import com.nikolam.common.extensions.listFilesSafely
-import com.nikolam.feature_books.misc.BookTypes
+import com.nikolam.feature_books.domain.BookDomainModel
+import com.nikolam.feature_books.domain.BookRepository
+import com.nikolam.feature_books.misc.BookType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.File
 
-class BookScanner(private val sharedPreferences: SharedPreferences){
+class BookScanner(private val sharedPreferences: SharedPreferences, private val repository: BookRepository){
 
     lateinit var singleBookFolderPref : Set<String>
     lateinit var collectionBookFolderPref : Set<String>
+
+    lateinit var booksList : ArrayList<BookDomainModel>
 
     init{
         GlobalScope.launch(Dispatchers.IO) {
@@ -42,23 +46,43 @@ class BookScanner(private val sharedPreferences: SharedPreferences){
         val singleBooks = singleBookFiles
         for (f in singleBooks) {
             if (f.isFile && f.canRead()) {
-                checkBook(f, BookTypes.BookSingleFile)
+                checkBook(f, BookType.BookSingleFile)
             } else if (f.isDirectory && f.canRead()) {
-                checkBook(f, BookTypes.BookSingleFolder)
+                checkBook(f, BookType.BookSingleFolder)
             }
         }
 
         val collectionBooks = collectionBookFiles
         for (f in collectionBooks) {
             if (f.isFile && f.canRead()) {
-                checkBook(f, BookTypes.BookCollectionFile)
+                checkBook(f, BookType.BookCollectionFile)
             } else if (f.isDirectory && f.canRead()) {
-                checkBook(f, BookTypes.BookCollectionFolder)
+                checkBook(f, BookType.BookCollectionFolder)
             }
         }
     }
 
-    private fun checkBook(file : File, bookType: BookTypes) {
+    private fun checkBook(file : File, bookType: BookType) {
+        val exists = getBookFromDb(file, bookType)
+    }
 
+    private fun getBookFromDb(rootFile: File, type: BookType): BookDomainModel? {
+        val books = repository.getAllBooks()
+        if (rootFile.isDirectory) {
+            return books.firstOrNull {
+                rootFile.absolutePath == it.root && type == it.type
+            }
+        } else if (rootFile.isFile) {
+            for (b in books) {
+                if (rootFile.parentFile?.absolutePath == b.root && type === b.type) {
+                    val singleChapter = b.content.first()
+                    if (singleChapter.file == rootFile) {
+                        return b
+                    }
+                }
+            }
+        }
+        return null
     }
 }
+
