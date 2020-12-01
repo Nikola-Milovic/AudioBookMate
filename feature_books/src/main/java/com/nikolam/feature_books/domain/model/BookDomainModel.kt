@@ -1,4 +1,4 @@
-package com.nikolam.feature_books.domain
+package com.nikolam.feature_books.domain.model
 
 import com.nikolam.feature_books.misc.BookType
 

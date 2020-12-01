@@ -45,6 +45,8 @@ dependencies {
     api(LibraryDependency.NAVIGATION_FRAGMENT_KTX)
     api(LibraryDependency.NAVIGATION_UI_KTX)
     api(LibraryDependency.CORE_KTX)
+    implementation(LibraryDependency.FFMPEG)
+    implementation(LibraryDependency.SERIALIZATION_RUNTIME)
 
     addTestDependencies()
 }
