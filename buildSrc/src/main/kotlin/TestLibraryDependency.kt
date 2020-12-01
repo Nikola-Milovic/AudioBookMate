@@ -10,6 +10,7 @@ private object TestLibraryVersion {
     const val KAKAO = "2.3.4"
     const val DATABINDING = "3.5.3"
     const val NAVIGATION = "2.3.0"
+    const val HAMCREST = "2.2"
 }
 
 object TestLibraryDependency {
@@ -36,4 +37,5 @@ object TestLibraryDependency {
     const val ESSPRESSO_CONTRIB = "androidx.test.espresso:espresso-contrib:${TestLibraryVersion.ESPRESSO}"
 
     const val NAVIGATION = "androidx.navigation:navigation-testing:${TestLibraryVersion.NAVIGATION}"
+    const val HAMCREST = "org.hamcrest:hamcrest:${TestLibraryVersion.HAMCREST}"
 }

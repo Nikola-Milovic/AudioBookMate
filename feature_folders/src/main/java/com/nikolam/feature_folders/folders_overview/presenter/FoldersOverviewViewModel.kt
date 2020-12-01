@@ -46,7 +46,6 @@ internal class FoldersOverviewViewModel (private val folderManager: FolderManage
         collectionBookFolder = HashSet(folderManager.provideBookCollectionFolders())
 
         val combinedFolders = singleBookFolder.plus(collectionBookFolder)
-        
 
         sendAction(Action.FilesLoadingSuccess( combinedFolders.toList()))
     }

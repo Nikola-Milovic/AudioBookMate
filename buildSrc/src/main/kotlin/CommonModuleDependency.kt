@@ -19,6 +19,8 @@ fun DependencyHandler.addTestDependencies() {
     testImplementation(TestLibraryDependency.KLUENT)
     androidTestImplementation(TestLibraryDependency.KLUENT_ANDROID)
 
+    testImplementation(TestLibraryDependency.HAMCREST)
+
     debugImplementation(TestLibraryDependency.FRAGMENT_TESTING)
 
     androidTestImplementation(TestLibraryDependency.ESSPRESSO_CONTRIB)

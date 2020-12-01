@@ -34,11 +34,11 @@ class FolderChooserViewModelTest {
     var rule = InstantTaskExecutorRule()
 
 
-    internal var mockNavManager: NavManager = Mockito.mock(NavManager::class.java)
+    private var mockNavManager: NavManager = Mockito.mock(NavManager::class.java)
 
-    internal var dirFinder: StorageDirFinder = Mockito.mock(StorageDirFinder::class.java)
+    private var dirFinder: StorageDirFinder = Mockito.mock(StorageDirFinder::class.java)
 
-    internal var folderManager: FolderManager = Mockito.mock(FolderManager::class.java)
+    private var folderManager: FolderManager = Mockito.mock(FolderManager::class.java)
 
     private lateinit var cut: FolderChooserViewModel
 
@@ -53,7 +53,7 @@ class FolderChooserViewModelTest {
 
     @Test
     fun `when folder is chosen, will save the folder if not already saved`() {
-       //setup
+       //given
         val file = File("par", "child")
         val op = OperationMode.COLLECTION_BOOK
 
@@ -70,7 +70,7 @@ class FolderChooserViewModelTest {
 
     @Test
     fun `when folder is chosen, will not save the folder if already saved`() {
-        //setup
+        //given
         val file = File("par", "child")
         whenever(folderManager.provideBookCollectionFolders()).thenReturn (setOf(file.absolutePath))
         val op = OperationMode.COLLECTION_BOOK
