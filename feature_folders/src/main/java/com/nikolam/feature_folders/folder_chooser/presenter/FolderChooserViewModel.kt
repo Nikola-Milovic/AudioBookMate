@@ -1,6 +1,8 @@
 package com.nikolam.feature_folders.folder_chooser.presenter
 
 import android.annotation.SuppressLint
+import com.nikolam.common.extensions.closestFolder
+import com.nikolam.common.extensions.getContentsSorted
 import com.nikolam.common.navigation.NavManager
 import com.nikolam.feature_folders.FolderManager
 import com.nikolam.feature_folders.folder_chooser.data.StorageDirFinder
@@ -163,26 +165,4 @@ internal class FolderChooserViewModel(
         class FilesLoadingSuccess(val files: List<File>, val name: String) : Action()
         object FilesLoadingFailure : Action()
     }
-}
-
-/**
- * Returns the closest folder. If this is a folder return itself. Else return the parent.
- */
-private fun File.closestFolder(): File = if (isDirectory) {
-    this
-} else {
-    parentFile!!
-}
-
-/** Gets the containing files of a folder (restricted to music and folders) in a naturally sorted order.  */
-private fun File.getContentsSorted() = listFilesSafely(com.nikolam.common.FileRecognition.folderAndMusicFilter)
-    .sortedWith(com.nikolam.common.NaturalOrderComparator.fileComparator)
-
-/**
- * As there are cases where [File.listFiles] returns null even though it is a directory, we return
- * an empty list instead.
- */
-fun File.listFilesSafely(filter: FileFilter? = null): List<File> {
-    val array: Array<File>? = if (filter == null) listFiles() else listFiles(filter)
-    return array?.toList() ?: emptyList()
 }
