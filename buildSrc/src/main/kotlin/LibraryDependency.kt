@@ -25,13 +25,15 @@ private object LibraryVersion {
 
     const val FFMPEG = "4.3.2"
 
-    const val SERIALIZATION_RUNTIME = "0.20.0"
+    const val SERIALIZATION_RUNTIME = "1.0.0-RC2"
 }
 
 object LibraryDependency {
     const val KOTLIN = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${CoreVersion.KOTLIN}"
     // Required by Android dynamic feature modules and SafeArgs
     const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:${CoreVersion.KOTLIN}"
+    const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib:${CoreVersion.KOTLIN}"
+
     const val TIMBER = "com.jakewharton.timber:timber:${LibraryVersion.TIMBER}"
     const val PLAY_CORE = "com.google.android.play:core:${LibraryVersion.PLAY_CORE}"
     const val COROUTINES_ANDROID =
@@ -79,5 +81,5 @@ object LibraryDependency {
     const val ROOM_KTX = "androidx.room:room-ktx:${LibraryVersion.ROOM}"
 
     const val FFMPEG = "com.arthenica:mobile-ffmpeg-audio:${LibraryVersion.FFMPEG}"
-    const val SERIALIZATION_RUNTIME = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${LibraryVersion.SERIALIZATION_RUNTIME}"
+    const val SERIALIZATION_JSON = "org.jetbrains.kotlinx:kotlinx-serialization-json:${LibraryVersion.SERIALIZATION_RUNTIME}"
 }

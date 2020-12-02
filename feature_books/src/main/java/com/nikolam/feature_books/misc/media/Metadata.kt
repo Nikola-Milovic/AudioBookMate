@@ -1,4 +1,4 @@
-package com.nikolam.common.media
+package com.nikolam.feature_books.misc.media
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

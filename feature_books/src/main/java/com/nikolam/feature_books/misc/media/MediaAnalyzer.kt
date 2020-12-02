@@ -1,21 +1,26 @@
-package com.nikolam.common.media
+package com.nikolam.feature_books.misc.media
 
 import com.arthenica.mobileffmpeg.Config
 import com.arthenica.mobileffmpeg.FFprobe
+import com.nikolam.feature_books.data.model.MarkData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
-import kotlinx.serialization.json.JsonDecodingException
+import kotlinx.serialization.parse
 import timber.log.Timber
 import java.io.File
+import java.lang.Exception
+import kotlin.time.ExperimentalTime
+import kotlin.time.seconds
 
 
+@ExperimentalTime
 class MediaAnalyzer() {
 
-    private val json = Json(JsonConfiguration.Stable.copy(ignoreUnknownKeys = true))
+    private val json = Json{ignoreUnknownKeys= true}
 
     suspend fun analyze(file: File): Result {
         Timber.d("analyze $file")
@@ -29,8 +34,8 @@ class MediaAnalyzer() {
         Timber.d(result.message)
 
         val parsed = try {
-            json.parse(MetaDataScanResult.serializer(), result.message)
-        } catch (e: JsonDecodingException) {
+            json.decodeFromString(MetaDataScanResult.serializer(), result.message)
+        } catch (e: Exception) {
             Timber.e(e, "Unable to parse $file")
             return Result.Failure
         }

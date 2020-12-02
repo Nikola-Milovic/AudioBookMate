@@ -6,7 +6,6 @@ import com.nikolam.common.BOOK_SINGLE
 import com.nikolam.common.FileRecognition
 import com.nikolam.common.NaturalOrderComparator
 import com.nikolam.common.extensions.listFilesSafely
-import com.nikolam.common.media.MediaAnalyzer
 import com.nikolam.feature_books.domain.BookRepository
 import com.nikolam.feature_books.domain.model.BookDomainModel
 import com.nikolam.feature_books.domain.model.ChapterDomainModel
@@ -14,7 +13,6 @@ import com.nikolam.feature_books.misc.BookType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.io.File
 
 class BookScanner(

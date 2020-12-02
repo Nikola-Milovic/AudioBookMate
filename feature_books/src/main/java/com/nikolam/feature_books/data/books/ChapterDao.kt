@@ -10,7 +10,7 @@ import java.io.File
 
 @Dao
 interface ChapterDao {
-    @Query("SELECT * FROM books WHERE root_file = :file")
+    @Query("SELECT * FROM chapters WHERE root_file = :file")
     fun getChapterByRootFile(file : File): ChapterDataModel
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

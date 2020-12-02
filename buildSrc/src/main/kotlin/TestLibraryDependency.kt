@@ -3,7 +3,7 @@ private object TestLibraryVersion {
     const val KLUENT = "1.60"
     const val TEST_RUNNER = "1.0.2"
     const val ESPRESSO = "3.1.0"
-    const val MOCKITO = "3.2.4"
+    const val MOCKITO = "3.6.28"
     const val MOCKITO_KOTLIN = "2.2.0"
     const val ANDROID_X_TEST = "2.1.0"
     const val FRAGMENT_VERSION = "1.2.5"

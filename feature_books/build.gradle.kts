@@ -4,6 +4,7 @@ plugins {
     id(GradlePluginId.KOTLIN_ANDROID_EXTENSIONS)
     id(GradlePluginId.KOTLIN_KAPT)
     id(GradlePluginId.SAFE_ARGS)
+    id(GradlePluginId.SERIALIZATION)
     id("kotlin-android")
 }
 
@@ -68,6 +69,10 @@ dependencies {
     implementation(LibraryDependency.ROOM_COMPILER)
     implementation(LibraryDependency.ROOM_KTX)
     kapt(LibraryDependency.ROOM_COMPILER)
+
+    implementation(LibraryDependency.SERIALIZATION_JSON)
+    implementation(LibraryDependency.FFMPEG)
+    api(LibraryDependency.KOTLIN_STD)
 
     implementation(project(":common"))
 
