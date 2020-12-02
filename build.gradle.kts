@@ -2,6 +2,7 @@ import io.gitlab.arturbosch.detekt.detekt
 
 // all projects = root project + sub projects in li
 allprojects {
+
     repositories {
         google()
         jcenter()
@@ -38,6 +39,11 @@ subprojects {
 
 fun Project.configureAndroid() {
     (project.extensions.findByName("android") as? com.android.build.gradle.BaseExtension)?.run {
+        packagingOptions {
+            exclude("META-INF/metadata.jvm.kotlin_module")
+            exclude("META-INF/metadata.kotlin_module")
+        }
+
         sourceSets {
             map { it.java.srcDir("src/${it.name}/kotlin") }
         }

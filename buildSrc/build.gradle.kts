@@ -23,7 +23,6 @@ kotlinDslPluginOptions {
 object PluginsVersions {
     const val GRADLE_ANDROID = "4.0.1"
     const val GRADLE_VERSIONS = "0.27.0"
-    const val KOTLIN = "1.4.10"
     const val NAVIGATION = "2.1.0"
     const val JACOCO = "0.16.0"
     const val FABRIC = "1.31.2"
@@ -31,6 +30,7 @@ object PluginsVersions {
     const val KTLINT = "9.2.1"
     const val DETEKT = "1.9.1"
     const val GRAPH_GENERATOR = "0.6.0-SNAPSHOT"
+    const val KOTLIN = "1.4.20"
 }
 
 dependencies {
